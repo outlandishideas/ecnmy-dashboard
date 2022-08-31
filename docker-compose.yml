@@ -1,0 +1,32 @@
+# docker-compose for local use. Access `web` at localhost:30200.
+version: "3.7"
+
+volumes:
+    local_economy_col_data: {}
+
+services:
+    app:
+        build:
+            context: .
+        ports:
+            - "30200:30200"
+        volumes:
+            - .:/var/www/html
+        env_file:
+            - .env.docker.local
+        depends_on:
+            - db
+    db:
+        image: postgres:12.8-alpine
+        volumes:
+            - ./local_economy_col_data:/var/lib/postgresql/
+        ports:
+            - "5432:5432"
+        env_file:
+            - .env.postgres.local
+    adminer:
+        image: adminer
+        ports:
+            - "30201:8080"
+        depends_on:
+            - db

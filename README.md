@@ -2,6 +2,10 @@
 
 A 3-Week Project for Economy, a charity with a "vision is of a flourishing and sustainable society in which there is diverse and inclusive public conversation about the economy, and economics is a tool everybody can use to make confident personal choices; articulate their needs, values and priorities; take action to shape the economy and participate in democracy." [Economy website](https://www.ecnmy.org/).
 
+## Repositories
+
+With subsequent development being done by Outlandish, [this repo](https://github.com/outlandishideas/ecnmy-dashboard) was forked from [the Founders & Coders one](https://github.com/fac24/ecnmy). However we have "detached" the fork to provide a smoother experience in terms of pull request defaults etc., since we don't expect new code to be merged back to the original demo repo.
+
 ## Project Description
 
 With a week of design and two weeks of build, we put together a website that enables the key user journey: "As a journalist who is not a specialist in economics, I'd like a way to easily access and understand data relevant to the stories I am telling so that my audience find my reporting relevant, trustworthy and helps them engage with the economy". It does so by entering data from several datasets into a database, in a way that standardises its format (up to a poitn). This step means that the data can be presented consistently in the website: on cards with key statistics and with a range of data visualisations that make it easier to interpret the data than working through large tables of unfiltered data. As well as following links to the full datasets, the user can download the specific data used to generate the visualisation. 
@@ -9,14 +13,34 @@ With a week of design and two weeks of build, we put together a website that ena
 
 ## Running Locally
 
+### With Docker
+
+* `cp .env.docker.local.example .env.docker.local`
+* [Get a DataWrappper token](https://developer.datawrapper.de/docs/getting-started)
+  choosing
+    * chart read + write access,
+    * theme read access and
+    * visualization read access
+* Populate `.env.docker.local`'s `DATAWRAPPER_API_KEY` with that token
+* `docker-compose run --rm app ./scripts/populate_db_docker`
+* `docker-compose up -d app`
+* App is running at [localhost:30200](http://localhost:30200)
+
+You can also `docker-compose up -d adminer` to use Adminer on [localhost:30201](http://localhost:30201).
+
+### With native database etc.
+
+This requires a compatible version of Postgres (e.g. 12.x). If you have Docker, it's
+probably less work to use Docker.
+
 - clone the repository https://github.com/fac24/ecnmy.git
 - cd into the repo ``cd ecnmy``
 - run ``npm install`` to install the dependencies
 - run ``./scripts/create_db`` to create a local database, also creates a ``.env.development.local`` file with your database url
 - run ``./scripts/populate_db`` to populate the local database with your data
 - Create a datawrapper account to get an API Access Token
-(https://developer.datawrapper.de/docs/getting-started)
-- Add this token to the ``.env.development.local`` with the name ``API_KEY='{yourApiAccessToken}'``
+(https://developer.datawrapper.de/docs/getting-started) – see Docker info above for permissions needed.
+- Add this token to the ``.env.development.local`` with the name ``DATAWRAPPER_API_KEY='{yourApiAccessToken}'``
 - To run the server run ``npm run dev``
 
 ## Running in deployment
