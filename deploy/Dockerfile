@@ -1,16 +1,13 @@
 FROM node:16-alpine3.15
 
-RUN apk add postgresql
-
-# Install the AWS CLI - needed to load in secrets safely from S3 – and `git` for prestissimo.
+# Install the AWS CLI - needed to load in secrets safely from S3 – and `postgresql` for DB client.
 # See https://aws.amazon.com/blogs/security/how-to-manage-secrets-for-amazon-ec2-container-service-based-applications-by-using-amazon-s3-and-docker/
-# Install the AWS CLI - needed to load in secrets safely from S3. See https://aws.amazon.com/blogs/security/how-to-manage-secrets-for-amazon-ec2-container-service-based-applications-by-using-amazon-s3-and-docker/
-RUN apk add --no-cache aws-cli
+RUN apk add --no-cache aws-cli postgresql
 
 # https://stackoverflow.com/a/65443098/2803757
 # + Follow the conventional deploy location for all simple ECS apps.
 WORKDIR /var/www/html
-COPY ./ ./
+COPY ../ ./
 
 RUN npm install --force --quiet
 
