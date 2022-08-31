@@ -18,7 +18,7 @@ export default async function dataVisualiser(
   const postResponse = await fetch("https://api.datawrapper.de/v3/charts", {
     method: "POST",
     headers: {
-      Authorization: process.env.API_KEY,
+      Authorization: process.env.DATAWRAPPER_API_KEY,
       "content-type": "application/json",
     },
     body: JSON.stringify({
@@ -38,7 +38,7 @@ export default async function dataVisualiser(
     {
       method: "PUT",
       headers: {
-        Authorization: process.env.API_KEY,
+        Authorization: process.env.DATAWRAPPER_API_KEY,
         "content-type": "text/csv",
       },
 
@@ -53,7 +53,7 @@ export default async function dataVisualiser(
       {
         method: "PATCH",
         headers: {
-          Authorization: process.env.API_KEY,
+          Authorization: process.env.DATAWRAPPER_API_KEY,
           "content-type": "application/json",
         },
 
@@ -78,7 +78,7 @@ export default async function dataVisualiser(
       {
         method: "PATCH",
         headers: {
-          Authorization: process.env.API_KEY,
+          Authorization: process.env.DATAWRAPPER_API_KEY,
           "content-type": "application/json",
         },
 
@@ -106,7 +106,7 @@ export default async function dataVisualiser(
     {
       method: "POST",
       headers: {
-        Authorization: process.env.API_KEY,
+        Authorization: process.env.DATAWRAPPER_API_KEY,
       },
     }
   );

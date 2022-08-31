@@ -9,6 +9,23 @@ With a week of design and two weeks of build, we put together a website that ena
 
 ## Running Locally
 
+### With Docker
+
+* `cp .env.docker.local.example .env.docker.local`
+* [Get a DataWrappper token](https://developer.datawrapper.de/docs/getting-started)
+  choosing chart read+write and theme read access
+* Populate `.env.docker.local`'s `DATAWRAPPER_API_KEY` with that token
+* `docker-compose run --rm app ./scripts/populate_db_docker`
+* `docker-compose up -d app`
+* App is running at [localhost:30200](http://localhost:30200)
+
+You can also `docker-compose up -d adminer` to use Adminer on [localhost:30201](http://localhost:30201).
+
+### With native database etc.
+
+This requires a compatible version of Postgres (e.g. 12.x). If you have Docker, it's
+probably less work to use Docker.
+
 - clone the repository https://github.com/fac24/ecnmy.git
 - cd into the repo ``cd ecnmy``
 - run ``npm install`` to install the dependencies
@@ -16,7 +33,7 @@ With a week of design and two weeks of build, we put together a website that ena
 - run ``./scripts/populate_db`` to populate the local database with your data
 - Create a datawrapper account to get an API Access Token
 (https://developer.datawrapper.de/docs/getting-started)
-- Add this token to the ``.env.development.local`` with the name ``API_KEY='{yourApiAccessToken}'``
+- Add this token to the ``.env.development.local`` with the name ``DATAWRAPPER_API_KEY='{yourApiAccessToken}'``
 - To run the server run ``npm run dev``
 
 ## Running in deployment
