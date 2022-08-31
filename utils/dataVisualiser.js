@@ -18,7 +18,7 @@ export default async function dataVisualiser(
   const postResponse = await fetch("https://api.datawrapper.de/v3/charts", {
     method: "POST",
     headers: {
-      Authorization: process.env.DATAWRAPPER_API_KEY,
+      Authorization: `Bearer ${process.env.DATAWRAPPER_API_KEY}`,
       "content-type": "application/json",
     },
     body: JSON.stringify({
@@ -27,6 +27,12 @@ export default async function dataVisualiser(
       lastEditStep: 3,
     }),
   });
+
+  if (postResponse.status >= 400) {
+    console.log(`Initial chart creation failed with ${postResponse.status} (${postResponse.statusText})`);
+
+    return undefined;
+  }
 
   //chartId needed for URL that will ultimately be put into the iframe on the page
   const postJson = await postResponse.json();
@@ -38,7 +44,7 @@ export default async function dataVisualiser(
     {
       method: "PUT",
       headers: {
-        Authorization: process.env.DATAWRAPPER_API_KEY,
+        Authorization: `Bearer ${process.env.DATAWRAPPER_API_KEY}`,
         "content-type": "text/csv",
       },
 
@@ -53,7 +59,7 @@ export default async function dataVisualiser(
       {
         method: "PATCH",
         headers: {
-          Authorization: process.env.DATAWRAPPER_API_KEY,
+          Authorization: `Bearer ${process.env.DATAWRAPPER_API_KEY}`,
           "content-type": "application/json",
         },
 
@@ -78,7 +84,7 @@ export default async function dataVisualiser(
       {
         method: "PATCH",
         headers: {
-          Authorization: process.env.DATAWRAPPER_API_KEY,
+          Authorization: `Bearer ${process.env.DATAWRAPPER_API_KEY}`,
           "content-type": "application/json",
         },
 
@@ -106,7 +112,7 @@ export default async function dataVisualiser(
     {
       method: "POST",
       headers: {
-        Authorization: process.env.DATAWRAPPER_API_KEY,
+        Authorization: `Bearer ${process.env.DATAWRAPPER_API_KEY}`,
       },
     }
   );
