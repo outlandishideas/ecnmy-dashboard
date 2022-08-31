@@ -33,11 +33,11 @@ workflows:
             branches:
               only:
                 - develop
+          path: ./deploy
           registry-id: AWS_REGISTRY_ID
           repo: 'staging-ecnmy-dashbd'
           region: '${AWS_REGION}'
           tag: 'staging,staging-${CIRCLE_SHA1}'
-          extra-build-args: '--build-arg env=stg'
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
@@ -53,10 +53,11 @@ workflows:
   #           branches:
   #             only:
   #               - main
+  #         path: ./deploy
+  #         registry-id: AWS_REGISTRY_ID
   #         repo: 'production-ecnmy-dashbd'
-  #         region: AWS_REGION
+  #         region: '${AWS_REGION}'
   #         tag: 'production,production-${CIRCLE_SHA1}'
-  #         extra-build-args: '--build-arg env=prod'
   #     - aws-ecs/deploy-service-update:
   #         requires:
   #           - aws-ecr/build-and-push-image
