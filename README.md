@@ -17,7 +17,10 @@ With a week of design and two weeks of build, we put together a website that ena
 
 * `cp .env.docker.local.example .env.docker.local`
 * [Get a DataWrappper token](https://developer.datawrapper.de/docs/getting-started)
-  choosing chart read+write and theme read access
+  choosing
+    * chart read + write access,
+    * theme read access and
+    * visualization read access
 * Populate `.env.docker.local`'s `DATAWRAPPER_API_KEY` with that token
 * `docker-compose run --rm app ./scripts/populate_db_docker`
 * `docker-compose up -d app`
@@ -36,7 +39,7 @@ probably less work to use Docker.
 - run ``./scripts/create_db`` to create a local database, also creates a ``.env.development.local`` file with your database url
 - run ``./scripts/populate_db`` to populate the local database with your data
 - Create a datawrapper account to get an API Access Token
-(https://developer.datawrapper.de/docs/getting-started)
+(https://developer.datawrapper.de/docs/getting-started) – see Docker info above for permissions needed.
 - Add this token to the ``.env.development.local`` with the name ``DATAWRAPPER_API_KEY='{yourApiAccessToken}'``
 - To run the server run ``npm run dev``
 
