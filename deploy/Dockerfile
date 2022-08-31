@@ -5,8 +5,7 @@ RUN apk add postgresql
 # Install the AWS CLI - needed to load in secrets safely from S3 – and `git` for prestissimo.
 # See https://aws.amazon.com/blogs/security/how-to-manage-secrets-for-amazon-ec2-container-service-based-applications-by-using-amazon-s3-and-docker/
 # Install the AWS CLI - needed to load in secrets safely from S3. See https://aws.amazon.com/blogs/security/how-to-manage-secrets-for-amazon-ec2-container-service-based-applications-by-using-amazon-s3-and-docker/
-RUN apt-get update -qq && apt-get install -y awscli && \
-    rm -rf /var/lib/apt/lists/* /var/cache/apk/*
+RUN apk add --no-cache aws-cli
 
 # https://stackoverflow.com/a/65443098/2803757
 # + Follow the conventional deploy location for all simple ECS apps.
