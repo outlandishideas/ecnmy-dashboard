@@ -4,6 +4,10 @@ FROM node:16-alpine3.15
 # See https://aws.amazon.com/blogs/security/how-to-manage-secrets-for-amazon-ec2-container-service-based-applications-by-using-amazon-s3-and-docker/
 RUN apk add --no-cache aws-cli postgresql
 
+# Must currently be explicitly *something* to avoid a build time crash in `connection.js`. Runtime
+# ECS should set it to a real value.
+ENV DATABASE_URL="postgres://buildtimeonly:replaceme@localhost:5432/replaceme"
+
 # https://stackoverflow.com/a/65443098/2803757
 # + Follow the conventional deploy location for all simple ECS apps.
 WORKDIR /var/www/html
