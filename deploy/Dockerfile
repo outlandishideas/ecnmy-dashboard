@@ -10,7 +10,7 @@ RUN apk add --no-cache aws-cli
 # https://stackoverflow.com/a/65443098/2803757
 # + Follow the conventional deploy location for all simple ECS apps.
 WORKDIR /var/www/html
-COPY . /var/www/html
+COPY ./ ./
 
 RUN npm install --force --quiet
 
