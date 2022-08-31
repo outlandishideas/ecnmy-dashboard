@@ -15,6 +15,6 @@ export $(aws s3 cp ${SECRETS_URI} - | grep -v '^#' | xargs)
 # TODO decide how we'll load data in. Probably here in the entrypoint since we don't have DB migrations,
 # or a way to populate it at build time, and likely no time to make a separate data patch ECS task?
 
-# Simulate vanilla/default ENTRYPOINT. `npm run build` should have happened at Docker build time.
+# Simulate vanilla/default CMD. `npm run build` should have happened at Docker build time.
 echo "Starting app..."
-npm run start
+npm start --port=80

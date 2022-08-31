@@ -13,7 +13,7 @@ RUN apt-get update -qq && apt-get install -y awscli && \
 WORKDIR /var/www/html
 COPY . /var/www/html
 
-RUN npm install
+RUN npm install --force --quiet
 
 # We always want ECS builds to be 'prod-like' from Next's perspective, including
 # on staging => `NODE_ENV=production`.
@@ -26,4 +26,4 @@ ENV PORT=$PORT
 
 EXPOSE $PORT
 
-ENTRYPOINT [ "npm", "run", "start" ]
+CMD [ "npm", "start", "--port=${PORT}" ]
