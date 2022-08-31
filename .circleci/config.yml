@@ -9,7 +9,7 @@ jobs:
   # unattended within this sprint.
   lint:
     docker:
-      - image: cimg/node:16
+      - image: cimg/node:16.7
     steps:
       - checkout
       - restore_cache:
