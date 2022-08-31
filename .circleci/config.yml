@@ -33,7 +33,7 @@ workflows:
             branches:
               only:
                 - develop
-          path: ./deploy
+          dockerfile: deploy/Dockerfile
           registry-id: AWS_REGISTRY_ID
           repo: 'staging-ecnmy-dashbd'
           region: '${AWS_REGION}'
@@ -53,7 +53,7 @@ workflows:
   #           branches:
   #             only:
   #               - main
-  #         path: ./deploy
+  #         dockerfile: deploy/Dockerfile
   #         registry-id: AWS_REGISTRY_ID
   #         repo: 'production-ecnmy-dashbd'
   #         region: '${AWS_REGION}'
