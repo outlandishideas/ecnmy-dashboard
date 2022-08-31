@@ -34,7 +34,7 @@ workflows:
               only:
                 - develop
           repo: 'staging-ecnmy-dashbd'
-          region: AWS_REGION
+          region: '${AWS_REGION}'
           tag: 'staging,staging-${CIRCLE_SHA1}'
           extra-build-args: '--build-arg env=stg'
       - aws-ecs/deploy-service-update:
