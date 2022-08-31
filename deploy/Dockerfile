@@ -7,7 +7,7 @@ RUN apk add --no-cache aws-cli postgresql
 # https://stackoverflow.com/a/65443098/2803757
 # + Follow the conventional deploy location for all simple ECS apps.
 WORKDIR /var/www/html
-COPY ../ ./
+COPY ../ /var/www/html
 
 RUN npm install --force --quiet
 
