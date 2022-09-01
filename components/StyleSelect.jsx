@@ -18,6 +18,7 @@ export default function StyleSelect({
       </label>
       <Select
         id={`select-${id}`}
+        instanceId={`select-${id}`}
         name={id}
         options={options}
         defaultValue={defaultValue}
