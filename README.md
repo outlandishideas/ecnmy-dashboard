@@ -22,7 +22,7 @@ With a week of design and two weeks of build, we put together a website that ena
     * theme read access and
     * visualization read access
 * Populate `.env.docker.local`'s `DATAWRAPPER_API_KEY` with that token
-* `docker-compose run --rm app ./scripts/populate_db_docker`
+* `docker-compose run --rm app ./scripts/populate_db_docker_local`
 * `docker-compose up -d app`
 * App is running at [localhost:30200](http://localhost:30200)
 

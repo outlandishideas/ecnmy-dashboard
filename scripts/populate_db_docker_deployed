@@ -3,31 +3,11 @@
 # stop script when an error occurs
 set -e
 
-# Import .env file so we have the DATABASE_* variable
-#
-
-# set -d flag for deployment command: ./scripts/populate_db -d
-while getopts ":d" o; do
-  case "${o}" in
-    d)
-      deploy=true
-      ;;
-  esac
-done
-
-. "./.env.development.local"
-
-if [ "$deploy" = true ]
-then
-  echo 'time to deployment'
-  DATABASE_URL=$DEPLOY_DB_URL
-fi
-
 if [ -z "$DATABASE_URL" ]
 then
   echo "\$DATABASE_URL is empty!"
 else
-  echo "Found \$DATABASE_URL in .env.development.local"
+  echo "Found \$DATABASE_URL in env"
   echo "Now executing database init file in psql..."
   psql $DATABASE_URL -q -f "./database/init.sql"
   psql $DATABASE_URL -q -f "./database/locations.sql"

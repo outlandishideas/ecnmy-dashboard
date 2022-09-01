@@ -13,7 +13,7 @@ fi
 export $(aws s3 cp ${SECRETS_URI} - | grep -v '^#' | xargs)
 
 echo "Populating database..."
-/var/www/html/scripts/populate_db_docker
+/var/www/html/scripts/populate_db_docker_deployed
 
 # TODO decide how we'll load data in. Probably here in the entrypoint since we don't have DB migrations,
 # or a way to populate it at build time, and likely no time to make a separate data patch ECS task?

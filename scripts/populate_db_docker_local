@@ -3,12 +3,12 @@
 # stop script when an error occurs
 set -e
 
-# Import .env file so we have the DATABASE_NAME variable
+# Import .env file so we have the DATABASE_* variable
 #
 
 # set -d flag for deployment command: ./scripts/populate_db -d
-while getopts ":d" o; do 
-  case "${o}" in 
+while getopts ":d" o; do
+  case "${o}" in
     d)
       deploy=true
       ;;
@@ -17,8 +17,8 @@ done
 
 . "./.env.docker.local"
 
-if [ "$deploy" = true ] 
-then 
+if [ "$deploy" = true ]
+then
   echo 'time to deployment'
   DATABASE_URL=$DEPLOY_DB_URL
 fi
