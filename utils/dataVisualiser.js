@@ -22,6 +22,8 @@ export default async function dataVisualiser(
       "content-type": "application/json",
     },
     body: JSON.stringify({
+      folderId: parseInt(process.env.DATAWRAPPER_FOLDER_ID, 10),
+      organizationId: process.env.DATAWRAPPER_TEAM_ID,
       title: title,
       type: chartType,
       lastEditStep: 3,

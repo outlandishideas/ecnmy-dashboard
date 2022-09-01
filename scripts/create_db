@@ -14,5 +14,5 @@ psql -q -c "CREATE DATABASE ${DB_NAME} WITH OWNER ${DB_NAME}user"
 echo "Created Postgres database '${DB_NAME}'"
 
 DB_URL="postgres://${DB_NAME}user:pass123@localhost:5432/${DB_NAME}"
-echo "DATABASE_URL='${DB_URL}'" > .env.development.local
+echo "DATABASE_URL='${DB_URL}'\nDATAWRAPPER_FOLDER_ID=116003\nDATAWRAPPER_TEAM_ID=ty7nPc1R" > .env.development.local
 echo "Created .env.development.local containing DATABASE_URL"
