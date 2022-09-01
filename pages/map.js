@@ -52,7 +52,7 @@ export default function Map({
   const [indicatorOptions, setIndicatorOptions] = useState(
     selectOptions(filteredAllIndicators)
   );
-  const [mapId, mapLoading, setMapData, setMapIndicator] = useChoropleth();
+  const [mapUrl, mapLoading, setMapData, setMapIndicator] = useChoropleth();
 
   //filters viewable indicators on the basis of chosen topic
   useEffect(() => {
@@ -123,13 +123,15 @@ export default function Map({
         {mapLoading ? (
           <Loading />
         ) : (
+          mapUrl ? (
           <iframe
             title={`choropleth showing ${indicator?.value} in London`}
-            src={`https://datawrapper.dwcdn.net/${mapId}/1/`}
+            src={mapUrl}
             className="w-full min-w-full h-full"
             scrolling="no"
             frameBorder="0"
           ></iframe>
+          ) : undefined
         )}
       </div>
     </>

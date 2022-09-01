@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function useDatawrapper() {
-  const [chartId, setChartId] = useState(null);
+  const [chartUrl, setChartUrl] = useState(null);
   const [loading, setLoading] = useState(null);
   const [dataset, setDataset] = useState(null);
   const [indicator, setIndicator] = useState(null);
@@ -20,6 +20,10 @@ export default function useDatawrapper() {
 
   // Send the datawrapper-proxy the details needed to send to datawrapper
   useEffect(() => {
+    if (!csv || !indicator) {
+      return
+    }
+
     setLoading(true);
     fetch("/api/datawrapper-proxy", {
       method: "POST",
@@ -32,10 +36,10 @@ export default function useDatawrapper() {
     })
       .then((resolve) => resolve.json())
       .then((resolve) => {
-        setChartId(resolve.chartId);
+        setChartUrl(resolve.chartUrl);
         setLoading(false);
       });
   }, [csv, indicator]);
 
-  return [chartId, loading, setDataset, setIndicator];
+  return [chartUrl, loading, setDataset, setIndicator];
 }

@@ -58,13 +58,13 @@ export default function Indicator({
   chartCsv,
   tableCsv,
 }) {
-  const [lineChartId, lineChartLoading] = useDatawrapper(
+  const [lineChartUrl, lineChartLoading] = useDatawrapper(
     chartCsv,
     indicator,
     location,
     "d3-lines"
   );
-  const [tableId, tableLoading] = useDatawrapper(
+  const [tableUrl, tableLoading] = useDatawrapper(
     tableCsv,
     indicator,
     location,
@@ -108,14 +108,16 @@ export default function Indicator({
           {lineChartLoading === true ? (
             <Loading />
           ) : (
-            <iframe
-              title={`A chart showing the change in ${indicator} in ${location}`}
-              id="datawrapper-chart-0jKkG"
-              src={`https://datawrapper.dwcdn.net/${lineChartId}/1/`}
-              className="w-full min-w-full h-full"
-              scrolling="no"
-              frameBorder="0"
-            ></iframe>
+            lineChartUrl ? (
+              <iframe
+                title={`A chart showing the change in ${indicator} in ${location}`}
+                id="datawrapper-chart-0jKkG"
+                src={lineChartUrl}
+                className="w-full min-w-full h-full"
+                scrolling="no"
+                frameBorder="0"
+              ></iframe>
+            ) : undefined
           )}
         </div>
       </div>
@@ -124,15 +126,17 @@ export default function Indicator({
         {tableLoading === true ? (
           <Loading />
         ) : (
-          <iframe
-            style={{ height: tableHeight }}
-            title={`A table for ${indicator} in ${location}`}
-            id="datawrapper-chart-0jKkG"
-            src={`https://datawrapper.dwcdn.net/${tableId}/1/`}
-            className="w-full min-w-full h-full"
-            scrolling="no"
-            frameBorder="0"
-          ></iframe>
+          tableUrl ? (
+            <iframe
+              style={{ height: tableHeight }}
+              title={`A table for ${indicator} in ${location}`}
+              id="datawrapper-chart-0jKkG"
+              src={tableUrl}
+              className="w-full min-w-full h-full"
+              scrolling="no"
+              frameBorder="0"
+            ></iframe>
+          ) : undefined
         )}
       </div>
     </main>
