@@ -12,6 +12,9 @@ fi
 # Load the S3 secrets file contents into the environment variables
 export $(aws s3 cp ${SECRETS_URI} - | grep -v '^#' | xargs)
 
+echo "Populating database..."
+../scripts/populate_db_docker
+
 # TODO decide how we'll load data in. Probably here in the entrypoint since we don't have DB migrations,
 # or a way to populate it at build time, and likely no time to make a separate data patch ECS task?
 
