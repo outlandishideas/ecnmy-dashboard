@@ -5,7 +5,7 @@ const nextConfig = {
 };
 
 module.exports = {
-  nextConfig,
+  ...nextConfig,
   // Quick error handling that shows the user all topics for a borough even though they didn't go on that url
   async rewrites() {
     return [
