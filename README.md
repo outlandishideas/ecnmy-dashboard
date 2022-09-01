@@ -60,7 +60,7 @@ We have 3 POST api endpoints
 - deployedURL/api/datawrapper-proxy
     - This route is a POST request to allow us to create datawrapper charts in the client side, by running a proxy server route
     - It takes in {csv, indicator, location, chartType} in the body
-    - Response 200 json, with the resolved chartId for the published chart
+    - Response 200 json, with the resolved chartId and chartUrl for the published chart
 - deployedURL/api/location-topic-form
     - This route is a POST request to allow us to redirect to different pages of the site after submitting a form
     - It takes in location and topic in the body
@@ -127,11 +127,7 @@ We used Tailwind CSS for styling components. While some components are reused ac
 
 ### Form
 
-As it stands, the only way to update content, style and functionality on the site is through altering the code. In some cases (especially content), this will be easy without a knowledge of code. 
-
-### Extensive error handling
-
-There is currently not comprehensive error handling, meaning that sometimes the user will see untailored error messages. There are known bugs on the choropleth (data is sometimes not updated in time to appear on the page). Extensive use of the site may result in a 500 error message on all pages of the site, since the free plan of the remote database used for the site limits the number of database requests. 
+As it stands, the only way to update content, style and functionality on the site is through altering the code. In some cases (especially content), this will be easy without a knowledge of code.
 
 ### Further finessing of Datawrapper
 
