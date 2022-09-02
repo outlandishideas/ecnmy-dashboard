@@ -2,14 +2,43 @@
 
 A 3-Week Project for Economy, a charity with a "vision is of a flourishing and sustainable society in which there is diverse and inclusive public conversation about the economy, and economics is a tool everybody can use to make confident personal choices; articulate their needs, values and priorities; take action to shape the economy and participate in democracy." [Economy website](https://www.ecnmy.org/).
 
-## Repositories
-
-With subsequent development being done by Outlandish, [this repo](https://github.com/outlandishideas/ecnmy-dashboard) was forked from [the Founders & Coders one](https://github.com/fac24/ecnmy). However we have "detached" the fork to provide a smoother experience in terms of pull request defaults etc., since we don't expect new code to be merged back to the original demo repo.
-
 ## Project Description
 
 With a week of design and two weeks of build, we put together a website that enables the key user journey: "As a journalist who is not a specialist in economics, I'd like a way to easily access and understand data relevant to the stories I am telling so that my audience find my reporting relevant, trustworthy and helps them engage with the economy". It does so by entering data from several datasets into a database, in a way that standardises its format (up to a poitn). This step means that the data can be presented consistently in the website: on cards with key statistics and with a range of data visualisations that make it easier to interpret the data than working through large tables of unfiltered data. As well as following links to the full datasets, the user can download the specific data used to generate the visualisation. 
 
+## Repositories
+
+With subsequent development being done by Outlandish, [this repo](https://github.com/outlandishideas/ecnmy-dashboard) was forked from [the Founders & Coders one](https://github.com/fac24/ecnmy). However we have "detached" the fork to provide a smoother experience in terms of pull request defaults etc., since we don't expect new code to be merged back to the original demo repo.
+
+## Deployment and CI
+
+* Since Sep '22 Outlandish dev, the Staging environment (the only hosted/internet accessible one)
+  is on ECS and the database is Outlandish's shared RDS Postgres. This means no more artificial
+  database access limits.
+* We use CircleCI to deploy: `develop` automatically deploys to Staging.
+* Lint runs on every push in CI.
+* Tests don't run in CI for now because only e2e's are written and they need the app running in
+  another thread, which is time consuming to set up with automation.
+* See [.circleci/config.yml](.circleci/config.yml) for configuration.
+
+## Sanity Studio
+
+We use [Sanity](https://www.sanity.io/) to provide a quick, free, lightweight headless CMS with a hosted editing
+interface we don't have to deploy ourselves.
+
+The whole `studio/` file is `.dockerignore`'d so should not appear in built runtime containers.
+
+To run the studio locally, you should be in the team in `.env.docker.local.example`. You'll need to add your own
+API key for the main app to load content.
+
+You can natively (no Docker for now) run Studio on a custom port that is CORS-allowed (I was already using 3333),
+from the project root directory, with:
+
+  * `npm run sanity-local`
+
+The hosted Studio is live here. You can redeploy it with:
+
+  * `npm run sanity-deploy`
 
 ## Running Locally
 
