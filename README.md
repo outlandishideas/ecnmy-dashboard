@@ -76,7 +76,7 @@ probably less work to use Docker.
 
 - The deployed site will need the same API Access Token as an environment variable
 - It will also need a database url. It is probably wise not to use your local url here as this will be a live site. We have used elephantSQL for ours and will hand that url over, this will need to be saved as ``DATABASE_URL='{YOUR DATABASE URL}'``
-- To easily populate the deployed database, in your repositories ``.env.development.local`` file create a vairable ``DEPLOY_DB_URL={YOUR DEPLOYED DATABASE URL}`` then run ``./scripts/populate_db -d``
+- To easily populate the deployed database, in your repositories ``.env.development.local`` file create a variable ``DEPLOY_DB_URL={YOUR DEPLOYED DATABASE URL}`` then run ``./scripts/populate_db -d``
 
 ## API
 
