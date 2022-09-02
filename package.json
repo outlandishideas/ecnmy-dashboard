@@ -6,7 +6,7 @@
     "dev": "next dev --port=30200",
     "build": "next build",
     "lint": "next lint",
-    "postinstall": "(node -e \"if (! require('fs').existsSync('./studio')){process.exit(1)} \" && (cd studio && npx @sanity/cli install))",
+    "postinstall": "if [ -e studio ]; then cd studio && npx @sanity/cli install; fi",
     "sanity-deploy": "npm --prefix studio run deploy",
     "sanity-local": "npm --prefix studio run start --port=3355",
     "start": "next start",
