@@ -21,6 +21,25 @@ With subsequent development being done by Outlandish, [this repo](https://github
   another thread, which is time consuming to set up with automation.
 * See [.circleci/config.yml](.circleci/config.yml) for configuration.
 
+## Sanity Studio
+
+We use [Sanity](https://www.sanity.io/) to provide a quick, free, lightweight headless CMS with a hosted editing
+interface we don't have to deploy ourselves.
+
+The whole `studio/` file is `.dockerignore`'d so should not appear in built runtime containers.
+
+To run the studio locally, you should be in the team in `.env.docker.local.example`. You'll need to add your own
+API key for the main app to load content.
+
+You can natively (no Docker for now) run Studio on a custom port that is CORS-allowed (I was already using 3333),
+from the project root directory, with:
+
+  * `npm run sanity-local`
+
+The hosted Studio is live here. You can redeploy it with:
+
+  * `npm run sanity-deploy`
+
 ## Running Locally
 
 ### With Docker

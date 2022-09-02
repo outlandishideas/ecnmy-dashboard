@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "next dev --port=30200",
     "build": "next build",
-    "start": "next start",
     "lint": "next lint",
+    "postinstall": "(cd studio && npx @sanity/cli install)",
+    "sanity-deploy": "npm --prefix studio run deploy",
+    "sanity-local": "npm --prefix studio run start --port=3355",
+    "start": "next start",
     "test": "cypress open",
     "test-t": "cypress run"
   },

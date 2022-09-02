@@ -7,7 +7,8 @@
   "author": "Noel Light-Hilary <noel@outlandish.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "sanity start",
+    "start": "sanity start --port=3355",
+    "deploy": "sanity deploy",
     "build": "sanity build"
   },
   "keywords": [
