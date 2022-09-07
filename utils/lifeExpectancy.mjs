@@ -7,7 +7,7 @@ async function jsonParser(file) {
   return data;
 }
 
-export default async function lifeExpectancy(route, tooltip) {
+export default async function lifeExpectancy(route, indicatorGroup) {
   const gender = await jsonParser(route);
 
   gender.data.forEach((item) => {
@@ -38,7 +38,7 @@ export default async function lifeExpectancy(route, tooltip) {
     title: metadataAPI.title,
     source: "ONS",
     sampleSize: "320,000 (UK wide)",
-    tooltips: tooltip,
+    indicatorGroup,
     datasetLink: datasetLink,
   };
 

@@ -153,6 +153,11 @@ This was run once to populate the locations table with London boroughs as well a
 
 This converts the JSON files in datasets to SQL. ONS information generally comes in CSV form. We converted this to JSON with a VS Code plugin [JSON to CSV](https://marketplace.visualstudio.com/items?itemName=khaeransori.json2csv). If you want to add datasets, you may need to alter this file. You will then need to run it using ``node json_to_sql.mjs``.
 
+If using Docker and you also need to test the latest data with the frontend:
+
+  * `docker-compose run --rm app node scripts/json_to_sql.mjs`
+  * `docker-compose run --rm app ./scripts/populate_db_docker_local`
+
 ### datasets_topics.sql
 
 We wrote this file manually. Therefore, if the order of the topics or datasets is ordered in the topics table or the datasets table, this joining table will need to be updated accordingly. 

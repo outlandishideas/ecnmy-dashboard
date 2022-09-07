@@ -7,7 +7,7 @@ async function jsonParser(file) {
   return data;
 }
 
-export default async function wellbeing(route, tooltip) {
+export default async function wellbeing(route, indicatorGroup) {
   const emotion = await jsonParser(route);
 
   emotion.data.forEach((item) => {
@@ -35,7 +35,7 @@ export default async function wellbeing(route, tooltip) {
     title: metadataAPI.title,
     source: "ONS",
     sampleSize: "150,000 (UK wide)",
-    tooltips: tooltip,
+    indicatorGroup,
     datasetLink: datasetLink,
   };
 
