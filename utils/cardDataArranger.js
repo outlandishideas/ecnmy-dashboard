@@ -17,6 +17,10 @@ export const getDataByGeography = (arr, Geography) => {
 
 // Find the percentage change based on a previous years values
 const findChange = (current, previous, Geography) => {
+  if (!previous || previous.length === 0) {
+    return null;
+  }
+
   const currentValue = getDataByGeography(current, Geography)?.Value || 0;
   const previousValue = getDataByGeography(previous, Geography)?.Value || 0;
   return ((currentValue - previousValue) / previousValue) * 100;
@@ -51,7 +55,7 @@ export default function cardDataArranger(arr, location) {
     const isNull =
       locationData?.Value === "" ? true : locationData === null ? true : false;
     const currentYear = allCurrentYearData[0].Time;
-    const previousYear = lastYearsData[0].Time;
+    const previousYear = lastYearsData.length > 0 ? lastYearsData[0].Time : null;
 
     return {
       cardData: {

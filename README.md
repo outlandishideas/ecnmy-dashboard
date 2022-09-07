@@ -160,8 +160,7 @@ If using Docker and you also need to test the latest data with the frontend:
 
 ### datasets_topics.sql
 
-We wrote this file manually. Therefore, if the order of the topics or datasets is ordered in the topics table or the datasets table, this joining table will need to be updated accordingly. 
- 
+We wrote this file manually. Therefore, if the order of the topics or datasets is ordered in the topics table or the datasets table, this joining table will need to be updated accordingly.
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 

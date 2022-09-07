@@ -1,0 +1,268 @@
+{
+  "data": [
+    {
+      "Borough": "Barking and Dagenham",
+      "Geography code": "E09000002",
+      "Percentage of part-time jobs held by residents that are low paid": "55.1%",
+      "Number of low-pay part-time jobs held by residents": 10000,
+      "Percentage of full-time jobs held by residents that are low paid": "14.4%",
+      "Number of low paid full-time jobs held by residents": 6000
+    },
+    {
+      "Borough": "Barnet",
+      "Geography code": "E09000003",
+      "Percentage of part-time jobs held by residents that are low paid": "34.1%",
+      "Number of low-pay part-time jobs held by residents": 12000,
+      "Percentage of full-time jobs held by residents that are low paid": "14.1%",
+      "Number of low paid full-time jobs held by residents": 13000
+    },
+    {
+      "Borough": "Bexley",
+      "Geography code": "E09000004",
+      "Percentage of part-time jobs held by residents that are low paid": "45.2%",
+      "Number of low-pay part-time jobs held by residents": 9000,
+      "Percentage of full-time jobs held by residents that are low paid": "13.5%",
+      "Number of low paid full-time jobs held by residents": 9000
+    },
+    {
+      "Borough": "Brent",
+      "Geography code": "E09000005",
+      "Percentage of part-time jobs held by residents that are low paid": "53.1%",
+      "Number of low-pay part-time jobs held by residents": 15000,
+      "Percentage of full-time jobs held by residents that are low paid": "20.8%",
+      "Number of low paid full-time jobs held by residents": 18000
+    },
+    {
+      "Borough": "Bromley",
+      "Geography code": "E09000006",
+      "Percentage of part-time jobs held by residents that are low paid": "41.4%",
+      "Number of low-pay part-time jobs held by residents": 15000,
+      "Percentage of full-time jobs held by residents that are low paid": "11.5%",
+      "Number of low paid full-time jobs held by residents": 11000
+    },
+    {
+      "Borough": "Camden",
+      "Geography code": "E09000007",
+      "Percentage of part-time jobs held by residents that are low paid": "36.6%",
+      "Number of low-pay part-time jobs held by residents": 5000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    },
+    {
+      "Borough": "Croydon",
+      "Geography code": "E09000008",
+      "Percentage of part-time jobs held by residents that are low paid": "50.1%",
+      "Number of low-pay part-time jobs held by residents": 16000,
+      "Percentage of full-time jobs held by residents that are low paid": "13.9%",
+      "Number of low paid full-time jobs held by residents": 16000
+    },
+    {
+      "Borough": "Ealing",
+      "Geography code": "E09000009",
+      "Percentage of part-time jobs held by residents that are low paid": "41.7%",
+      "Number of low-pay part-time jobs held by residents": 15000,
+      "Percentage of full-time jobs held by residents that are low paid": "16.6%",
+      "Number of low paid full-time jobs held by residents": 17000
+    },
+    {
+      "Borough": "Enfield",
+      "Geography code": "E09000010",
+      "Percentage of part-time jobs held by residents that are low paid": "55.3%",
+      "Number of low-pay part-time jobs held by residents": 19000,
+      "Percentage of full-time jobs held by residents that are low paid": "15.1%",
+      "Number of low paid full-time jobs held by residents": 10000
+    },
+    {
+      "Borough": "Greenwich",
+      "Geography code": "E09000011",
+      "Percentage of part-time jobs held by residents that are low paid": "42%",
+      "Number of low-pay part-time jobs held by residents": 8000,
+      "Percentage of full-time jobs held by residents that are low paid": "11.6%",
+      "Number of low paid full-time jobs held by residents": 9000
+    },
+    {
+      "Borough": "Hackney",
+      "Geography code": "E09000012",
+      "Percentage of part-time jobs held by residents that are low paid": "52.4%",
+      "Number of low-pay part-time jobs held by residents": 14000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    },
+    {
+      "Borough": "Hammersmith and Fulham",
+      "Geography code": "E09000013",
+      "Percentage of part-time jobs held by residents that are low paid": "47.6%",
+      "Number of low-pay part-time jobs held by residents": 5000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    },
+    {
+      "Borough": "Haringey",
+      "Geography code": "E09000014",
+      "Percentage of part-time jobs held by residents that are low paid": "52.4%",
+      "Number of low-pay part-time jobs held by residents": 14000,
+      "Percentage of full-time jobs held by residents that are low paid": "15.4%",
+      "Number of low paid full-time jobs held by residents": 10000
+    },
+    {
+      "Borough": "Harrow",
+      "Geography code": "E09000015",
+      "Percentage of part-time jobs held by residents that are low paid": "40.8%",
+      "Number of low-pay part-time jobs held by residents": 10000,
+      "Percentage of full-time jobs held by residents that are low paid": "17%",
+      "Number of low paid full-time jobs held by residents": 10000
+    },
+    {
+      "Borough": "Havering",
+      "Geography code": "E09000016",
+      "Percentage of part-time jobs held by residents that are low paid": "47%",
+      "Number of low-pay part-time jobs held by residents": 11000,
+      "Percentage of full-time jobs held by residents that are low paid": "13.8%",
+      "Number of low paid full-time jobs held by residents": 9000
+    },
+    {
+      "Borough": "Hillingdon",
+      "Geography code": "E09000017",
+      "Percentage of part-time jobs held by residents that are low paid": "37.3%",
+      "Number of low-pay part-time jobs held by residents": 10000,
+      "Percentage of full-time jobs held by residents that are low paid": "13.3%",
+      "Number of low paid full-time jobs held by residents": 12000
+    },
+    {
+      "Borough": "Hounslow",
+      "Geography code": "E09000018",
+      "Percentage of part-time jobs held by residents that are low paid": "48.2%",
+      "Number of low-pay part-time jobs held by residents": 13000,
+      "Percentage of full-time jobs held by residents that are low paid": "18.3%",
+      "Number of low paid full-time jobs held by residents": 13000
+    },
+    {
+      "Borough": "Islington",
+      "Geography code": "E09000019",
+      "Percentage of part-time jobs held by residents that are low paid": "46.3%",
+      "Number of low-pay part-time jobs held by residents": 7000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    },
+    {
+      "Borough": "Kensington and Chelsea",
+      "Geography code": "E09000020",
+      "Percentage of part-time jobs held by residents that are low paid": "24.7%",
+      "Number of low-pay part-time jobs held by residents": 2000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    },
+    {
+      "Borough": "Kingston upon Thames",
+      "Geography code": "E09000021",
+      "Percentage of part-time jobs held by residents that are low paid": "48.9%",
+      "Number of low-pay part-time jobs held by residents": 8000,
+      "Percentage of full-time jobs held by residents that are low paid": "11.1%",
+      "Number of low paid full-time jobs held by residents": 6000
+    },
+    {
+      "Borough": "Lambeth",
+      "Geography code": "E09000022",
+      "Percentage of part-time jobs held by residents that are low paid": "41.3%",
+      "Number of low-pay part-time jobs held by residents": 9000,
+      "Percentage of full-time jobs held by residents that are low paid": "9.9%",
+      "Number of low paid full-time jobs held by residents": 10000
+    },
+    {
+      "Borough": "Lewisham",
+      "Geography code": "E09000023",
+      "Percentage of part-time jobs held by residents that are low paid": "43.4%",
+      "Number of low-pay part-time jobs held by residents": 14000,
+      "Percentage of full-time jobs held by residents that are low paid": "11.4%",
+      "Number of low paid full-time jobs held by residents": 9000
+    },
+    {
+      "Borough": "London",
+      "Geography code": "E12000007",
+      "Percentage of part-time jobs held by residents that are low paid": "44.6%",
+      "Number of low-pay part-time jobs held by residents": 343000,
+      "Percentage of full-time jobs held by residents that are low paid": "12.2%",
+      "Number of low paid full-time jobs held by residents": 301000
+    },
+    {
+      "Borough": "Merton",
+      "Geography code": "E09000024",
+      "Percentage of part-time jobs held by residents that are low paid": "43.6%",
+      "Number of low-pay part-time jobs held by residents": 9000,
+      "Percentage of full-time jobs held by residents that are low paid": "10.7%",
+      "Number of low paid full-time jobs held by residents": 6000
+    },
+    {
+      "Borough": "Newham",
+      "Geography code": "E09000025",
+      "Percentage of part-time jobs held by residents that are low paid": "56.5%",
+      "Number of low-pay part-time jobs held by residents": 16000,
+      "Percentage of full-time jobs held by residents that are low paid": "12.9%",
+      "Number of low paid full-time jobs held by residents": 11000
+    },
+    {
+      "Borough": "Redbridge",
+      "Geography code": "E09000026",
+      "Percentage of part-time jobs held by residents that are low paid": "42.9%",
+      "Number of low-pay part-time jobs held by residents": 10000,
+      "Percentage of full-time jobs held by residents that are low paid": "14.1%",
+      "Number of low paid full-time jobs held by residents": 9000
+    },
+    {
+      "Borough": "Richmond upon Thames",
+      "Geography code": "E09000027",
+      "Percentage of part-time jobs held by residents that are low paid": "30.5%",
+      "Number of low-pay part-time jobs held by residents": 4000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    },
+    {
+      "Borough": "Southwark",
+      "Geography code": "E09000028",
+      "Percentage of part-time jobs held by residents that are low paid": "42.3%",
+      "Number of low-pay part-time jobs held by residents": 10000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    },
+    {
+      "Borough": "Sutton",
+      "Geography code": "E09000029",
+      "Percentage of part-time jobs held by residents that are low paid": "37.9%",
+      "Number of low-pay part-time jobs held by residents": 9000,
+      "Percentage of full-time jobs held by residents that are low paid": "11.2%",
+      "Number of low paid full-time jobs held by residents": 6000
+    },
+    {
+      "Borough": "Tower Hamlets",
+      "Geography code": "E09000030",
+      "Percentage of part-time jobs held by residents that are low paid": "53.2%",
+      "Number of low-pay part-time jobs held by residents": 12000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    },
+    {
+      "Borough": "Waltham Forest",
+      "Geography code": "E09000031",
+      "Percentage of part-time jobs held by residents that are low paid": "44.2%",
+      "Number of low-pay part-time jobs held by residents": 9000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    },
+    {
+      "Borough": "Wandsworth",
+      "Geography code": "E09000032",
+      "Percentage of part-time jobs held by residents that are low paid": "39.3%",
+      "Number of low-pay part-time jobs held by residents": 9000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    },
+    {
+      "Borough": "Westminster",
+      "Geography code": "E09000033",
+      "Percentage of part-time jobs held by residents that are low paid": "41.3%",
+      "Number of low-pay part-time jobs held by residents": 4000,
+      "Percentage of full-time jobs held by residents that are low paid": "NA",
+      "Number of low paid full-time jobs held by residents": "NA"
+    }
+  ]
+}
