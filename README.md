@@ -137,6 +137,12 @@ We are currently getting 3 types of 'chart' from datawrapper
 - d3-maps-choropleth
     - Again similar to the others in downloading data, but the major issue for the choropleth is its rendering on the page. Often datawrapper will take a couple extra seconds to publish the 'chart' so the rendered chart id will not be the correct chart id and so gives the previous chart. We tried fixing this bug in multiple ways, but the only fix we could find was to implement a delay function by a couple seconds, which we didn't include in the final product as it wasn't a proper way and wouldn't work every time.
 
+## Data preparation
+
+While the process for populating the database is in code, it's designed to be run locally and just builds up the .sql files in [database/](./database/), which are then checked in. i.e. no live web/runtime code changes the database or directly uses the contents of [datasets/](./datasets/).
+
+There is code which calls out to e.g. ONS web APIs (e.g. in [lifeExpectancy.mjs](./utils/lifeExpectancy.mjs)), but this is just for collecting metadata about the data that was manually converted. This also doesn't run live since the results are saved to the DB as part of the `json_to_sql` run. (See below for more on this.)
+
 ## Maintenance
 
 ### location_scraper.mjs 
@@ -145,7 +151,7 @@ This was run once to populate the locations table with London boroughs as well a
 
 ### json_to_sql.mjs
 
-This converts the JSON files in datasets to SQL. ONS information generally comes in CSV form. We converted this to JSON with a VSCode plugin. If you want to add datasets, you may need to alter this file. You will then need to run it using ``node json_to_sql.mjs``.
+This converts the JSON files in datasets to SQL. ONS information generally comes in CSV form. We converted this to JSON with a VS Code plugin [JSON to CSV](https://marketplace.visualstudio.com/items?itemName=khaeransori.json2csv). If you want to add datasets, you may need to alter this file. You will then need to run it using ``node json_to_sql.mjs``.
 
 ### datasets_topics.sql
 
