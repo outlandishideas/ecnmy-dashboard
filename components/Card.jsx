@@ -15,7 +15,7 @@ export default function Card({ dataset, location }) {
       </div>
 
       <div className="bg-ecnmy-white mb-1 p-4 rounded-b-lg h-full flex flex-col  justify-between">
-        {dataset.cardData.locationData === null ? null : (
+        {dataset.cardData.locationData?.Value === undefined ? null : (
           <h3 className="text-ecnmy-navy text-4xl text-center font-semibold">
             {dataset.cardData.locationData.Value.toLocaleString("en-UK")}
           </h3>
