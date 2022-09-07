@@ -34,7 +34,7 @@ workflows:
               only:
                 - develop
           dockerfile: deploy/Dockerfile
-          extra-build-args: '-e NEXT_PUBLIC_SANITY_PROJECT_ID=${NEXT_PUBLIC_SANITY_PROJECT_ID}'
+          extra-build-args: '--build-arg NEXT_PUBLIC_SANITY_PROJECT_ID=${NEXT_PUBLIC_SANITY_PROJECT_ID}'
           registry-id: AWS_REGISTRY_ID
           repo: 'staging-ecnmy-dashbd'
           region: '${AWS_REGION}'
@@ -55,7 +55,7 @@ workflows:
   #             only:
   #               - main
   #         dockerfile: deploy/Dockerfile
-  #         extra-build-args: '-e NEXT_PUBLIC_SANITY_PROJECT_ID=${NEXT_PUBLIC_SANITY_PROJECT_ID}'
+  #         extra-build-args: '--build-arg NEXT_PUBLIC_SANITY_PROJECT_ID=${NEXT_PUBLIC_SANITY_PROJECT_ID}'
   #         registry-id: AWS_REGISTRY_ID
   #         repo: 'production-ecnmy-dashbd'
   #         region: '${AWS_REGION}'
