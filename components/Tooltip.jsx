@@ -1,8 +1,13 @@
-import { dictionary } from "../database/dictionary";
-import { useState } from "react";
+import { useState } from 'react';
 
-export default function ToolTip({ indicator, tooltips }) {
+import { useSanityPreloads } from './SanityPreloads.jsx';
+
+export default function ToolTip({ indicator, indicatorGroup }) {
   const [hover, setHover] = useState(false);
+  const [sanityPreloadsState, setSanityPreloadsState] = useSanityPreloads();
+
+  const indicators = sanityPreloadsState.indicators || [];
+  const matchedIndicator = indicators.find(indicator => indicator.name === indicatorGroup);
 
   function handleHover() {
     setHover(!hover);
@@ -20,31 +25,36 @@ export default function ToolTip({ indicator, tooltips }) {
       >
         {indicator}
       </span>
-      <span
-        tabIndex={0}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
-        onFocus={handleHover}
-        onBlur={handleHover}
-      >
-        &#9432;
-      </span>
-
-      <span
-        className={`${
-          hover
-            ? "absolute inset-x-0 bottom-12 bg-ecnmy-black rounded-lg text-ecnmy-white p-2 text-sm capitalize-first"
-            : "hidden"
-        }`}
-      >
-        <ul>
-          {tooltips.map((tooltip, index) => (
-            <li key={index}>
-              {tooltip}: {dictionary[tooltip]}
-            </li>
-          ))}
-        </ul>
-      </span>
+      {
+        matchedIndicator ? (
+          <span
+            tabIndex={0}
+            onMouseEnter={handleHover}
+            onMouseLeave={handleHover}
+            onFocus={handleHover}
+            onBlur={handleHover}
+          >
+            &#9432;
+          </span>
+        ) : null
+      }
+      {
+        matchedIndicator ? (
+          <span
+          className={`${
+            hover
+              ? "absolute inset-x-0 bottom-12 bg-ecnmy-black rounded-lg text-ecnmy-white p-2 text-sm capitalize-first"
+              : "hidden"
+          }`}
+          >
+            <ul>
+              <li>
+                {matchedIndicator.tooltip}
+              </li>
+            </ul>
+          </span>
+        ) : null
+      }
     </h2>
   );
 }

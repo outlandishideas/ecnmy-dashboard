@@ -15,19 +15,19 @@ async function jsonParser(file) {
 const jsonToSql = async () => {
   const [happiness, happinessMetadata] = await wellbeing(
     "./datasets/happiness.json",
-    ["happiness"]
+    "happiness",
   );
   const [anxiety, anxietyMetadata] = await wellbeing(
     "./datasets/anxiety.json",
-    ["anxiety"]
+    "anxiety",
   );
-  const [femaleLifeExpectancy, femaleLifeExpectancyMetadata] =
-    await lifeExpectancy("./datasets/female_life_expectancy.json", [
-      "life expectancy",
-    ]);
+  const [femaleLifeExpectancy, femaleLifeExpectancyMetadata] = await lifeExpectancy(
+    "./datasets/female_life_expectancy.json",
+    "life expectancy",
+  );
   const [maleLifeExpectancy, maleLifeExpectancyMetadata] = await lifeExpectancy(
     "./datasets/male_life_expectancy.json",
-    ["life expectancy"]
+    "life expectancy",
   );
   const totalClaim = await jsonParser("./datasets/totalClaim.json");
 
@@ -60,7 +60,7 @@ const jsonToSql = async () => {
     release_date: "2022-07-19",
     source: "Nomis",
     sampleSize: null,
-    tooltips: ["JSA", "UC"],
+    indicatorGroup: "total JSA and UC claimants",
     datasetLink: "https://www.nomisweb.co.uk/sources/cc",
   };
   let sqlOutput = /*SQL*/ `BEGIN;\n\nINSERT INTO datasets (indicator, data, metadata) VALUES\n`;

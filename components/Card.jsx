@@ -10,7 +10,7 @@ export default function Card({ dataset, location }) {
       <div className="bg-ecnmy-white mb-1 flex flex-col rounded-t-lg">
         <ToolTip
           indicator={dataset.indicator}
-          tooltips={dataset.metadata.tooltips}
+          indicatorGroup={dataset.metadata.indicatorGroup}
         />
       </div>
 
