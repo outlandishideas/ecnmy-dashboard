@@ -7,7 +7,8 @@ RUN apk add --no-cache aws-cli postgresql
 # Must currently be explicitly *something* to avoid build time crashes. Runtime
 # ECS should set them to real values.
 ENV DATABASE_URL="postgres://buildtimeonly:replaceme@localhost:5432/replaceme"
-ENV NEXT_PUBLIC_SANITY_PROJECT_ID=""
+ARG NEXT_PUBLIC_SANITY_PROJECT_ID
+ENV NEXT_PUBLIC_SANITY_PROJECT_ID=$NEXT_PUBLIC_SANITY_PROJECT_ID
 
 # https://stackoverflow.com/a/65443098/2803757
 # + Follow the conventional deploy location for all simple ECS apps.
@@ -18,7 +19,7 @@ RUN npm install --force --quiet
 
 # We always want ECS builds to be 'prod-like' from Next's perspective, including
 # on staging => `NODE_ENV=production`.
-RUN NODE_ENV=production npm run build
+RUN NEXT_PUBLIC_SANITY_PROJECT_ID=$NEXT_PUBLIC_SANITY_PROJECT_ID NODE_ENV=production npm run build
 
 ARG PORT
 
