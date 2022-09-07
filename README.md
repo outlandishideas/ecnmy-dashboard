@@ -106,40 +106,9 @@ We have 3 POST api endpoints
 - Cypress testing
 - PostgreSQL
 
+## Dependencies
 
-## package.json
-
-```json
-{
-  "name": "ecnmy",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test": "cypress open",
-    "test-t": "cypress run"
-  },
-  "dependencies": {
-    "next": "12.2.2",
-    "pg": "^8.7.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-select": "^5.4.0"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.7",
-    "cypress": "^10.3.0",
-    "eslint": "8.19.0",
-    "eslint-config-next": "12.2.2",
-    "node-fetch": "^3.2.8",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.6"
-  }
-}
-```
+See [`package.json`](package.json).
 
 ## Architecture and Design
 
