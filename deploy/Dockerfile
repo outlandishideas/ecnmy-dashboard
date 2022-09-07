@@ -7,6 +7,7 @@ RUN apk add --no-cache aws-cli postgresql
 # Must currently be explicitly *something* to avoid build time crashes. Runtime
 # ECS should set them to real values.
 ENV DATABASE_URL="postgres://buildtimeonly:replaceme@localhost:5432/replaceme"
+ENV NEXT_PUBLIC_SANITY_PROJECT_ID=""
 
 # https://stackoverflow.com/a/65443098/2803757
 # + Follow the conventional deploy location for all simple ECS apps.
