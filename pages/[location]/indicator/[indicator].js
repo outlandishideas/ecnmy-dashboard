@@ -1,8 +1,9 @@
+import Link from 'next/link';
+
 import useDatawrapper from "../../../components/hooks/useDatawrapper";
 import { selectDatasetByIndicator } from "../../../database/model";
 import cardDataArranger from "../../../utils/cardDataArranger";
 import Loading from "../../../components/Loading";
-import Link from "next/link";
 
 export async function getServerSideProps({ params }) {
   // Get the parameters of the url

@@ -1,13 +1,14 @@
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+
 import {
   selectDistinctTopicsWithData,
   selectTopicsWithLinkedData,
 } from "../database/model";
 import StyleSelect from "../components/StyleSelect";
 import selectOptions from "../utils/selectOptions";
-import { useState, useEffect } from "react";
 import useChoropleth from "../components/hooks/useChoropleth";
 import Loading from "../components/Loading";
-import { useRouter } from "next/router";
 
 const sortByYearReturningOneYear = (arr, slice) => {
   return arr
@@ -52,7 +53,7 @@ export default function Map({
   const [indicatorOptions, setIndicatorOptions] = useState(
     selectOptions(filteredAllIndicators)
   );
-  const [mapUrl, mapLoading, setMapData, setMapIndicator] = useChoropleth();
+  const [mapUrl, mapLoading, setMapDataAndIndicator] = useChoropleth();
 
   //filters viewable indicators on the basis of chosen topic
   useEffect(() => {
@@ -78,11 +79,13 @@ export default function Map({
           const data = dataset.data.data
             .filter((dataset) => dataset.Geography !== "London")
             .filter((dataset) => dataset.Geography !== "United Kingdom");
-          setMapData(sortByYearReturningOneYear(data, [0, 33]));
-          setMapIndicator(indicatorToFilter);
+          setMapDataAndIndicator({
+            dataset: sortByYearReturningOneYear(data, [0, 33]),
+            indicator: indicatorToFilter,
+          });
         });
     }
-  }, [setMapData, indicator, setMapIndicator]);
+  }, [setMapDataAndIndicator, indicator]);
 
   //clicking a borough on the map redirects the user to the relevant indicator page
   const router = useRouter();
