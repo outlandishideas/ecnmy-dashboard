@@ -15,7 +15,7 @@ export default function useDatawrapper() {
   const [chartUrl, setChartUrl] = useState(null);
   const [loading, setLoading] = useState(null);
   const [datasetAndIndicator, setDatasetAndIndicator] = useState({
-    dataset: null,
+    dataset: null, // Array of objects. We'll convert with `buildCsv()` prior to calling out to Datawrapper.
     indicator: null,
   });
 
