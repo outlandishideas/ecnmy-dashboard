@@ -32,18 +32,16 @@ export default function Footer() {
               {
                 sanityPreloadsState.dataSources && sanityPreloadsState.dataSources.map((source, ii) => (
                   <li key={ii}>
-                    <Link href="{source.url}">
+                    <Link href={source.url}>
                       <a
                         className="w-44"
                         rel="noreferrer"
                         target="_blank"
-                        data-test-id="{source.name}-logo"
+                        data-test-id={source.name + '-logo'}
                       >
-                        <Image
-                          src={sanityImageBuilder.image(source.logo).width(100).url()}
-                          alt="{source.name}"
-                          width={100}
-                          layout="fill"
+                        <img
+                          src={sanityImageBuilder.image(source.logo).width(50).url()}
+                          alt={source.name}
                         />
                       </a>
                     </Link>
