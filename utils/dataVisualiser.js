@@ -20,7 +20,7 @@ export default async function dataVisualiser(
     title = `Table: ${indicator} in ${location}`;
   } else if (chartType === "d3-maps-choropleth") {
     title =
-      indicator === null ? " " : `A choropleth showing ${indicator} in London`;
+      indicator === null ? " " : `A map of ${indicator} in London`;
   }
 
   //initialises empty chart

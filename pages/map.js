@@ -125,7 +125,7 @@ export default function Map({
         ) : (
           mapUrl ? (
           <iframe
-            title={`choropleth showing ${indicator?.value} in London`}
+            title={`Map of ${indicator?.value} in London`}
             src={mapUrl}
             className="w-full min-w-full h-full"
             scrolling="no"
