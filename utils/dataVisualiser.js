@@ -67,8 +67,8 @@ export default async function dataVisualiser(
       metadata: {
         visualize: {
           tooltip: {
-            body: `Indicator value: {{ indicator }}`,
-            title: "Borough: {{ location }}",
+            body: `{{ indicator }}`,
+            title: "{{ location }}",
             fields: {
               location: "location",
               indicator: indicator,
