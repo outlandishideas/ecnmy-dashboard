@@ -2,13 +2,23 @@ import Link from 'next/link';
 
 import useDatawrapper from "../../../components/hooks/useDatawrapper";
 import { selectDatasetByIndicator } from "../../../database/model";
-import cardDataArranger from "../../../utils/cardDataArranger";
 import Loading from "../../../components/Loading";
+import cardDataArranger from "../../../utils/cardDataArranger";
+import sanityClient from '../../../utils/sanityClient';
 
 export async function getServerSideProps({ params }) {
   // Get the parameters of the url
   const indicator = params.indicator;
   const location = params.location;
+
+  let indicatorDetail = null;
+  const query = '*[_type == "indicator" && name == $indicator] {detail}';
+  const sanityParams = { indicator };
+
+  const indicators = await sanityClient.fetch(query, sanityParams);
+  if (indicators.length > 0) {
+    indicatorDetail = indicators[0].detail;
+  }
 
   // Select the single dataset needed for the specific indicator
   const dataset = await selectDatasetByIndicator(indicator);
@@ -47,12 +57,14 @@ export async function getServerSideProps({ params }) {
       chartCsv,
       tableCsv,
       indicator,
+      indicatorDetail,
     },
   };
 }
 
 export default function Indicator({
   indicator,
+  indicatorDetail,
   location,
   metadata,
   locationDataset,
@@ -80,6 +92,13 @@ export default function Indicator({
       <h1 className="blue capitalize font-bold text-center text-3xl p-5">
         {locationDataset.indicator} in {location}
       </h1>
+
+      { indicatorDetail && (
+        <p className="flex items-center flex-wrap justify-around detail">
+          {indicatorDetail}
+        </p>
+      )}
+
       <div className="flex items-center flex-wrap justify-around">
         <div className="p-5 rounded-xl  max-w-[400px]">
           <h2>

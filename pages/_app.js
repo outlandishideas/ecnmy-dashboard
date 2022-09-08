@@ -4,11 +4,11 @@ import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <SanityPreloads>
+    <SanityPreloads>
+      <Layout>
         <Component {...pageProps} />
-      </SanityPreloads>
-    </Layout>
+      </Layout>
+    </SanityPreloads>
   );
 }
 
