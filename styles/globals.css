@@ -93,3 +93,8 @@ a {
 .tooltip {
   margin-right: 0.25rem; /* Make this look more aligned alongside <h2/> 0.75rem left padding */
 }
+
+h3.text-xxl {
+  font-size: 3.375rem;
+  line-height: 3.75rem;
+}
