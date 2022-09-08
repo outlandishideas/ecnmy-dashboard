@@ -39,10 +39,12 @@ export default function Footer() {
                         target="_blank"
                         data-test-id={source.name + '-logo'}
                       >
-                        <img
-                          src={sanityImageBuilder.image(source.logo).width(50).url()}
-                          alt={source.name}
-                        />
+                        <picture>
+                          <img
+                            src={sanityImageBuilder.image(source.logo).width(50).url()}
+                            alt={source.name}
+                          />
+                        </picture>
                       </a>
                     </Link>
                   </li>
