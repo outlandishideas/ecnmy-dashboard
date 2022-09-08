@@ -24,8 +24,9 @@ export default function Help({ params }) {
 
   const info = howDesc[useRouter().route];
 
-  if (sanityPreloadsState.help) {
-    const matchedHelpItem = sanityPreloadsState.help.find((help) => help.page === info.page);
+  let matchedHelpItem;
+  if (sanityPreloadsState.help && !matchedHelpItem) {
+    matchedHelpItem = sanityPreloadsState.help.find((help) => help.page === info.page);
     if (matchedHelpItem !== undefined) {
       info.help = matchedHelpItem.help;
     }
@@ -60,11 +61,11 @@ export default function Help({ params }) {
               <h2 className="text-[30px] leading-relaxed font-semibold">
                 {info.title || 'Help'}
               </h2>
-              <p className="leading-loose">
+              <div className="leading-loose">
                 <ul>
                   {info.help.map(helpItem => (<li>{helpItem}</li>))}
                 </ul>
-              </p>
+              </div>
             </div>
           </div>
         </div>

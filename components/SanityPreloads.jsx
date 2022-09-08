@@ -40,7 +40,7 @@ export default function SanityPreloadsState(props) {
     getDataSources();
     getHelp();
     getIndicators();
-  }, [sanityPreloadsState])
+  }, [])
 
   return (
     <SanityPreloadsContext.Provider value={[sanityPreloadsState]}>
