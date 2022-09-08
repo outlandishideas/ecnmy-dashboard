@@ -21,7 +21,8 @@ export default function SanityPreloadsState(props) {
   useEffect(() => {
     const getDataSources = async () => {
       const query = '*[_type == "sources"] {sources}';
-      const dataSources = (await sanityClient.fetch(query))[0]; // First/only item has sources array.
+      const dataSources = (await sanityClient.fetch(query))[0].sources; // First/only item has sources array.
+
       setSanityPreloadsState({...sanityPreloadsState, dataSources})
     }
 

@@ -26,6 +26,7 @@ export default {
               title: 'Home URL',
               name: 'url',
               type: 'url',
+              required: true,
             },
             {
               title: 'Logo',
