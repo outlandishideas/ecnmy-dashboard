@@ -63,7 +63,7 @@ export default function Help({ params }) {
               </h2>
               <div className="leading-loose">
                 <ul>
-                  {info.help.map(helpItem => (<li>{helpItem}</li>))}
+                  {info.help.map((helpItem, ii) => (<li key={ii}>{helpItem}</li>))}
                 </ul>
               </div>
             </div>
