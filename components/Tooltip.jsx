@@ -28,6 +28,7 @@ export default function ToolTip({ indicator, indicatorGroup }) {
       {
         matchedIndicator ? (
           <span
+            className="tooltip"
             tabIndex={0}
             onMouseEnter={handleHover}
             onMouseLeave={handleHover}
