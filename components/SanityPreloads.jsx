@@ -16,16 +16,16 @@ const SanityPreloadsContext = createContext(null)
 export default function SanityPreloadsState(props) {
   const [sanityPreloadsState, setSanityPreloadsState] = useState(initialState)
 
-  const getTooltips = async () => {
-    const query = '*[_type == "indicator"] {name, tooltip}';
-    const indicators = await sanityClient.fetch(query);
-
-    setSanityPreloadsState({...sanityPreloadsState, indicators})
-  }
-
   useEffect(() => {
+    const getTooltips = async () => {
+      const query = '*[_type == "indicator"] {name, tooltip}';
+      const indicators = await sanityClient.fetch(query);
+
+      setSanityPreloadsState({...sanityPreloadsState, indicators})
+    }
+
     getTooltips()
-  }, [])
+  }, [sanityPreloadsState])
 
   return (
     <SanityPreloadsContext.Provider value={[sanityPreloadsState]}>
