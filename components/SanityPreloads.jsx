@@ -39,8 +39,6 @@ export default function SanityPreloadsState(props) {
       getHelp(),
       getIndicators(),
     ]).then(([dataSourcesQResult, help, indicators]) => {
-      console.log('promises promises', dataSourcesQResult);
-
       const dataSources = dataSourcesQResult[0].sources; // First + only item has the ordered sources array.
 
       setSanityPreloadsState({
