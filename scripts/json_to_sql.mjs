@@ -32,11 +32,6 @@ const jsonToSql = async () => {
     'Percentage of part-time jobs held by residents that are low paid',
     'part-time',
   );
-  const [fullTimeLowPay, fullTimeLowPayMetadata] = await lowPay(
-    './datasets/London_jobs_low_paid.json',
-    'Percentage of full-time jobs held by residents that are low paid',
-    'full-time',
-  );
 
   let sqlOutput = /*SQL*/ `BEGIN;\n\nINSERT INTO datasets (indicator, data, metadata) VALUES\n`;
 
@@ -62,9 +57,6 @@ const jsonToSql = async () => {
   sqlOutput += `('total JSA and UC claimants', '${JSON.stringify(
     totalClaim
   )}', '${JSON.stringify(totalClaimMetadata)}'),\n`;
-  sqlOutput += `('full-time low paid residents', '${JSON.stringify(
-    fullTimeLowPay
-  )}', '${JSON.stringify(fullTimeLowPayMetadata)}'),\n`;
   sqlOutput += `('part-time low paid residents', '${JSON.stringify(
     partTimeLowPay
   )}', '${JSON.stringify(partTimeLowPayMetadata)}'),\n`;

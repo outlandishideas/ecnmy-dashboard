@@ -8,7 +8,9 @@ import { createContext, useState, useContext, useEffect } from 'react'
 import sanityClient from '../utils/sanityClient'
 
 const initialState = {
-    indicators: [],
+  dataSources: [],
+  help: [],
+  indicators: [],
 };
 
 const SanityPreloadsContext = createContext(null)
@@ -16,15 +18,29 @@ const SanityPreloadsContext = createContext(null)
 export default function SanityPreloadsState(props) {
   const [sanityPreloadsState, setSanityPreloadsState] = useState(initialState)
 
-  const getTooltips = async () => {
-    const query = '*[_type == "indicator"] {name, tooltip}';
-    const indicators = await sanityClient.fetch(query);
-
-    setSanityPreloadsState({...sanityPreloadsState, indicators})
-  }
-
   useEffect(() => {
-    getTooltips()
+    const getDataSources = async () => {
+      const query = '*[_type == "sources"] {sources}';
+      const dataSources = (await sanityClient.fetch(query))[0].sources; // First/only item has sources array.
+
+      setSanityPreloadsState({...sanityPreloadsState, dataSources})
+    }
+
+    const getHelp = async () => {
+      const query = '*[_type == "help"] {page, title, help}';
+      const help = await sanityClient.fetch(query);
+      setSanityPreloadsState({...sanityPreloadsState, help})
+    }
+
+    const getIndicators = async () => {
+      const query = '*[_type == "indicator"] {name, tooltip}';
+      const indicators = await sanityClient.fetch(query);
+      setSanityPreloadsState({...sanityPreloadsState, indicators})
+    }
+
+    getDataSources();
+    getHelp();
+    getIndicators();
   }, [])
 
   return (
