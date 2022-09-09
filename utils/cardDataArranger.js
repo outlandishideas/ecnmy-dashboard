@@ -52,8 +52,7 @@ export default function cardDataArranger(arr, location) {
       boroughCurrentYearData.findIndex((item) => item.Geography === location) +
       1; // +1 as 0 indexed
     const change = findChange(allCurrentYearData, lastYearsData, location);
-    const isNull =
-      locationData?.Value === "" ? true : locationData === null ? true : false;
+    const isNull = locationData === null || locationData?.Value === '';
     const currentYear = allCurrentYearData[0].Time;
     const previousYear = lastYearsData.length > 0 ? lastYearsData[0].Time : null;
 
