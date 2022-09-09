@@ -97,8 +97,19 @@ a.emphasised {
   text-transform: uppercase;
 }
 
+.tooltip-wrapper {
+  position: relative; /* Ensure floating expanded boxes' absolute position works */
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
 .tooltip {
   margin-right: 0.25rem; /* Make this look more aligned alongside <h2/> 0.75rem left padding */
+}
+
+.tooltip-expansion {
+  min-width: 10rem;
+  text-align: center;
 }
 
 .detail {

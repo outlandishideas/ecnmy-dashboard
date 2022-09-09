@@ -14,7 +14,7 @@ export default function Tooltip({ indicator, indicatorGroup, outerHover = false 
   }
 
   return (
-    <>
+    <div className="tooltip-wrapper">
     {
       matchedIndicator ? (
         <span
@@ -34,7 +34,7 @@ export default function Tooltip({ indicator, indicatorGroup, outerHover = false 
         <span
         className={`${
           (hover || outerHover)
-            ? "absolute inset-x-0 bottom-12 bg-ecnmy-black rounded-lg text-ecnmy-white p-2 text-sm capitalize-first"
+            ? "tooltip-expansion absolute inset-x-0 bottom-12 bg-ecnmy-black rounded-lg text-ecnmy-white p-2 text-sm capitalize-first"
             : "hidden"
         }`}
         >
@@ -46,6 +46,6 @@ export default function Tooltip({ indicator, indicatorGroup, outerHover = false 
         </span>
       ) : null
     }
-    </>
+    </div>
   );
 }
