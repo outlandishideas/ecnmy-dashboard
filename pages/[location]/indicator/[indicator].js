@@ -14,7 +14,6 @@ export async function getServerSideProps({ params }) {
   let indicatorDetail = null;
   const query = '*[_type == "indicator" && name == $indicator] {detail}';
   const sanityParams = { indicator };
-
   const indicators = await sanityClient.fetch(query, sanityParams);
   if (indicators.length > 0) {
     indicatorDetail = indicators[0].detail;
@@ -30,23 +29,29 @@ export async function getServerSideProps({ params }) {
   );
   const [locationDataset] = cardDataArranger([dataset], location);
 
-  // Starting the csvs to send to datawrapper-proxy
-  let chartCsv = `Year,${indicator}\n`;
-  let tableCsv = `Year,${indicator}\n`;
+  let chartCsv = null;
+  let tableCsv = null;
 
-  let boroughDataSortedByYearChart = boroughData.sort((a, b) => {
-    return parseInt(a.Time.substring(0, 4)) - parseInt(b.Time.substring(0, 4));
-  });
-  let boroughDataSortedByYearTable = boroughData.sort((a, b) => {
-    return parseInt(b.Time.substring(0, 4)) - parseInt(a.Time.substring(0, 4));
-  });
+  // Set up chart + table only if there's data for more than one point in time.
+  if (boroughData.length > 1) {
+    // Starting the csvs to send to datawrapper-proxy
+    chartCsv = `Year,${indicator}\n`;
+    tableCsv = `Year,${indicator}\n`;
 
-  boroughDataSortedByYearChart.map((datum) => {
-    chartCsv += `${datum["Time"].substring(0, 4)},${datum["Value"]}\n`;
-  });
-  boroughDataSortedByYearTable.map((datum) => {
-    tableCsv += `${datum["Time"]},${datum["Value"]}\n`;
-  });
+    let boroughDataSortedByYearChart = boroughData.sort((a, b) => {
+      return parseInt(a.Time.substring(0, 4)) - parseInt(b.Time.substring(0, 4));
+    });
+    let boroughDataSortedByYearTable = boroughData.sort((a, b) => {
+      return parseInt(b.Time.substring(0, 4)) - parseInt(a.Time.substring(0, 4));
+    });
+
+    boroughDataSortedByYearChart.map((datum) => {
+      chartCsv += `${datum["Time"].substring(0, 4)},${datum["Value"]}\n`;
+    });
+    boroughDataSortedByYearTable.map((datum) => {
+      tableCsv += `${datum["Time"]},${datum["Value"]}\n`;
+    });
+  }
 
   return {
     props: {
@@ -71,12 +76,15 @@ export default function Indicator({
   chartCsv,
   tableCsv,
 }) {
+  // [null, false] if no CSV.
   const [lineChartUrl, lineChartLoading] = useDatawrapper(
     chartCsv,
     indicator,
     location,
     "d3-lines"
   );
+
+  // [null, false] if no CSV.
   const [tableUrl, tableLoading] = useDatawrapper(
     tableCsv,
     indicator,
@@ -84,8 +92,7 @@ export default function Indicator({
     "tables"
   );
 
-  let x = tableCsv.length * 3.9;
-  let tableHeight = x.toString() + "px";
+  const tableHeight = tableCsv ? `${(tableCsv.length * 3.9).toString()}px` : '0';
 
   return (
     <main>
