@@ -107,7 +107,7 @@ export default function Indicator({
           </pre>
         )}
 
-        <div className="h-[400px] min-w-[310px] max-w-[610px] flex-[1_1_50%] p-5">
+        <div className="h-[400px] min-w-[310px] flex-[1_1_50%] p-5">
           {lineChartLoading === true ? (
             <Loading />
           ) : (
@@ -142,7 +142,7 @@ export default function Indicator({
           )}
         </div>
 
-        <div className="max-w-[400px] flex-[1_1_50%] p-5">
+        <div className="flex-[1_1_50%] p-5">
           <h2>
             <span className="font-semibold">Name of study:</span>{" "}
             <Link href={metadata.datasetLink}>
