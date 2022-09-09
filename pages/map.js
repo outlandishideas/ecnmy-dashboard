@@ -123,6 +123,12 @@ export default function Map({
       </form>
 
       <div className={`w-1/2 h-[800px] m-auto`}>
+        { indicator?.value ? (
+          <h2 className="text-[30px] leading-relaxed font-semibold">
+            A map of {indicator?.value} in London
+          </h2>
+        ) : null}
+
         {mapLoading ? (
           <Loading />
         ) : (
