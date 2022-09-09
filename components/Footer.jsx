@@ -27,11 +27,11 @@ export default function Footer() {
             sources, current sources including the following:
           </p>
 
-          <div className="flex flex-wrap justify-around items-center gap-2">
-            <ul>
+          <div className="justify-around items-center gap-2">
+            <ul className="flex flex-row flex-wrap">
               {
                 sanityPreloadsState.dataSources && sanityPreloadsState.dataSources.map((source, ii) => (
-                  <li key={ii}>
+                  <li key={ii} className="source-logo">
                     <Link href={source.url}>
                       <a
                         className="w-44"
@@ -41,7 +41,7 @@ export default function Footer() {
                       >
                         <picture>
                           <img
-                            src={sanityImageBuilder.image(source.logo).width(50).url()}
+                            src={sanityImageBuilder.image(source.logo).width(150).url()}
                             alt={source.name}
                           />
                         </picture>

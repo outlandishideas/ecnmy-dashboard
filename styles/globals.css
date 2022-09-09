@@ -119,6 +119,11 @@ a.emphasised {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.source-logo {
+  margin: 1rem;
+  align-self: center;
+}
+
 h3.text-xxl {
   font-size: 3.375rem;
   line-height: 3.75rem;
