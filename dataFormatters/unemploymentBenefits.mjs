@@ -38,7 +38,7 @@ export default async function unemploymentBenefits() {
     release_date: "2022-07-19",
     source: "Nomis",
     sampleSize: null,
-    indicatorGroup: "total JSA and UC claimants",
+    indicatorGroup: "unemployment benefits claimants",
     datasetLink: "https://www.nomisweb.co.uk/sources/cc",
   };
 

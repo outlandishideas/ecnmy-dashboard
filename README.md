@@ -120,6 +120,7 @@ We used Tailwind CSS for styling components. While some components are reused ac
 - Personal wellbeing estimates by local authority (ONS) [happiness, anxiety]
 - Life Expectancy by local authority (ONS) [male, female]
 - Total Claimants (i.e. Jobseeker's Allowance and UC) (ONS, via Nomis) [total JSA and UC claimants]
+- Low paid part-time jobs (more complete data than full-time) (ONS via Trust for London)
 
 ## Backlog
 
@@ -135,7 +136,7 @@ We are currently getting 3 types of 'chart' from datawrapper
 - tables
     - Gives the data in a nice table. There is a similar download issue to d3-lines, but a more major problem of the table is it is rounding fractional numbers. This means that it gives weird data: for example, if locations data is between 2.5 and 3.49 for all the years it will just say 3 for each table entry.
 - d3-maps-choropleth
-    - Again similar to the others in downloading data, but the major issue for the choropleth is its rendering on the page. Often datawrapper will take a couple extra seconds to publish the 'chart' so the rendered chart id will not be the correct chart id and so gives the previous chart. We tried fixing this bug in multiple ways, but the only fix we could find was to implement a delay function by a couple seconds, which we didn't include in the final product as it wasn't a proper way and wouldn't work every time.
+    - Again similar to the others in downloading data. DataWrapper can take a couple of extra seconds to publish the 'chart', but there should now be a wait that only attempts to render when the API reports it's ready.
 
 ## Data preparation
 
