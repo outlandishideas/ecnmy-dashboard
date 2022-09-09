@@ -102,12 +102,12 @@ export default function Indicator({
 
       <div className="flex items-center flex-wrap justify-around">
         { indicatorDetail && (
-          <pre className="detail flex-[2_2_50%] p-5">
+          <pre className="detail flex-[1_1_50%] p-5">
             {indicatorDetail}
           </pre>
         )}
 
-        <div className="h-[400px] min-w-[310px] max-w-[610px] flex-[2_2_0%] p-5">
+        <div className="h-[400px] min-w-[310px] max-w-[610px] flex-[1_1_50%] p-5">
           {lineChartLoading === true ? (
             <Loading />
           ) : (
@@ -124,7 +124,7 @@ export default function Indicator({
           )}
         </div>
 
-        <div className="flex-[2_2_50%] p-5">
+        <div className="min-w-[310px] flex-[1_1_50%] p-5">
           {tableLoading === true ? (
             <Loading />
           ) : (
@@ -142,7 +142,7 @@ export default function Indicator({
           )}
         </div>
 
-        <div className="max-w-[400px] flex-[2_2_50%] p-5">
+        <div className="max-w-[400px] flex-[1_1_50%] p-5">
           <h2>
             <span className="font-semibold">Name of study:</span>{" "}
             <Link href={metadata.datasetLink}>
