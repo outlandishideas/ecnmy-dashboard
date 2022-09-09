@@ -102,12 +102,47 @@ export default function Indicator({
 
       <div className="flex items-center flex-wrap justify-around">
         { indicatorDetail && (
-          <pre className="detail flex flex-wrap  items-center justify-around">
+          <pre className="detail flex-[1_1_50%] p-5">
             {indicatorDetail}
           </pre>
         )}
 
-        <div className="p-5 rounded-xl  max-w-[400px]">
+        <div className="h-[400px] min-w-[310px] flex-[1_1_50%] p-5">
+          {lineChartLoading === true ? (
+            <Loading />
+          ) : (
+            lineChartUrl ? (
+              <iframe
+                title={`A chart showing the change in ${indicator} in ${location}`}
+                id="datawrapper-chart-0jKkG"
+                src={lineChartUrl}
+                className="w-full min-w-full h-full"
+                scrolling="no"
+                frameBorder="0"
+              ></iframe>
+            ) : undefined
+          )}
+        </div>
+
+        <div className="min-w-[310px] flex-[1_1_50%] p-5">
+          {tableLoading === true ? (
+            <Loading />
+          ) : (
+            tableUrl ? (
+              <iframe
+                style={{ height: tableHeight }}
+                title={`A table for ${indicator} in ${location}`}
+                id="datawrapper-chart-0jKkG"
+                src={tableUrl}
+                className="w-full min-w-full h-full"
+                scrolling="no"
+                frameBorder="0"
+              ></iframe>
+            ) : undefined
+          )}
+        </div>
+
+        <div className="flex-[1_1_50%] p-5">
           <h2>
             <span className="font-semibold">Name of study:</span>{" "}
             <Link href={metadata.datasetLink}>
@@ -131,40 +166,6 @@ export default function Indicator({
             {metadata.description}
           </p>
         </div>
-        <div className="w-full h-[400px] w-full min-w-[310px] max-w-[610px] p-5">
-          {lineChartLoading === true ? (
-            <Loading />
-          ) : (
-            lineChartUrl ? (
-              <iframe
-                title={`A chart showing the change in ${indicator} in ${location}`}
-                id="datawrapper-chart-0jKkG"
-                src={lineChartUrl}
-                className="w-full min-w-full h-full"
-                scrolling="no"
-                frameBorder="0"
-              ></iframe>
-            ) : undefined
-          )}
-        </div>
-      </div>
-
-      <div className="max-w-xl h-full m-auto border p-6">
-        {tableLoading === true ? (
-          <Loading />
-        ) : (
-          tableUrl ? (
-            <iframe
-              style={{ height: tableHeight }}
-              title={`A table for ${indicator} in ${location}`}
-              id="datawrapper-chart-0jKkG"
-              src={tableUrl}
-              className="w-full min-w-full h-full"
-              scrolling="no"
-              frameBorder="0"
-            ></iframe>
-          ) : undefined
-        )}
       </div>
     </main>
   );
