@@ -67,8 +67,8 @@ export default async function dataVisualiser(
       metadata: {
         visualize: {
           tooltip: {
-            body: `Indicator value: {{ indicator }}`,
-            title: "Borough: {{ location }}",
+            body: `{{ indicator }}`,
+            title: "{{ location }}",
             fields: {
               location: "location",
               indicator: indicator,
@@ -87,19 +87,39 @@ export default async function dataVisualiser(
   }
 
   const chartUrl = publishResponse.data.publicUrl;
-
-  // /** @param number */
-  // const publishVersion = publishResponse.version;
-
-  // TODO: Awaiting reply from DataWrapper regarding this always 404'ing.
-  // const publishStatusResponse = await callDWAndLogErrors(`/charts/${chartId}/publish/status/${publishVersion}`, 'GET');
-  // console.log('Status?', publishStatusResponse);
+  /**
+   * @param number
+   * @link https://tracker.outlandish.com/issue/ECONOMY-4#focus=Comments-87-27040.0-0
+   */
+  const publishVersion = publishResponse.version - 1;
 
   // We *could* potentially use the custom webhooks feature in DataWrapper settings, but this is a lot of
   // complexity we don't have time for this sprint (e.g. to have the server ping the client with Websockets),
   // *and* we'd eventually hit limitations with it only having 1 URL (what about Production?). So for now,
-  // to make this less flaky than the first proof of concept we poll every 0.5s for up to 15s using the publish
+  // to make this less flaky than the first proof of concept we poll every 0.5s for up to 7.5s using the publish
   // status endpoint.
+
+  const waitBetweenAttempts = 500; // ms
+  const maxAttempts = 15;
+
+  const checkPublished = async (attemptNumber) => {
+    const publishStatusResponse = await callDWAndLogErrors(`/charts/${chartId}/publish/status/${publishVersion}`, 'GET');
+    if (publishStatusResponse.progress.includes('done')) {
+      return Promise.resolve(true);
+    }
+
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (attemptNumber > maxAttempts) {
+          reject();
+        }
+
+        resolve(checkPublished(attemptNumber + 1));
+      }, waitBetweenAttempts);
+    });
+  };
+
+  await checkPublished(0);
 
   return {
     chartId,

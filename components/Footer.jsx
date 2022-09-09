@@ -1,8 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from 'react';
+import imageUrlBuilder from '@sanity/image-url'
+
 import ecnmyLogo from "../public/images/ecnmy-logo-white-background.png";
-import onsLogo from "../public/images/ons-logo-white-background.png";
+import { useSanityPreloads } from './SanityPreloads.jsx';
+import sanityClient from '../utils/sanityClient'
+
+const sanityImageBuilder = imageUrlBuilder(sanityClient);
+
 export default function Footer() {
+  const [sanityPreloadsState, setSanityPreloadsState] = useSanityPreloads();
+
+  useEffect(() => {
+    // No-op – make sure we load in new Sanity preloads state and get sources, as it's async
+    // + the footer renders right away.
+  }, [sanityPreloadsState]);
+
   return (
     <>
       <footer className="text-xs pt-6 pb-8 px-11 flex justify-around items-center flex-wrap border-solid border-ecnmy-charcoal border-t-2 border-b-2">
@@ -14,22 +28,29 @@ export default function Footer() {
           </p>
 
           <div className="flex flex-wrap justify-around items-center gap-2">
-            <Link href="https://www.ons.gov.uk/">
-              <a
-                className="w-44"
-                rel="noreferrer"
-                target="_blank"
-                data-test-id="ons-logo"
-              >
-                <Image
-                  src={onsLogo}
-                  alt="logo for the ONS with English and Welsh text (Office of National Statistics; Swyddfa Ystadegau Gwladol)"
-                  // width={120}
-                  // height={40}
-                  className=""
-                />
-              </a>
-            </Link>
+            <ul>
+              {
+                sanityPreloadsState.dataSources && sanityPreloadsState.dataSources.map((source, ii) => (
+                  <li key={ii}>
+                    <Link href={source.url}>
+                      <a
+                        className="w-44"
+                        rel="noreferrer"
+                        target="_blank"
+                        data-test-id={source.name + '-logo'}
+                      >
+                        <picture>
+                          <img
+                            src={sanityImageBuilder.image(source.logo).width(50).url()}
+                            alt={source.name}
+                          />
+                        </picture>
+                      </a>
+                    </Link>
+                  </li>
+                ))
+              }
+            </ul>
           </div>
         </div>
       </footer>
@@ -44,9 +65,6 @@ export default function Footer() {
             <Image
               src={ecnmyLogo}
               alt="logo for the charity 'Economy'"
-              // width=""
-              // height=""
-              className=""
             />
           </a>
         </Link>
