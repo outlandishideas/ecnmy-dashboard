@@ -31,6 +31,15 @@ export default function Card({ dataset, location }) {
           </h3>
         )}
         <ul className="list-disc m-4 text-base">
+          {cardData.ranking > 0 ? (
+            <li>{location} ranks {cardData.ranking}/33 of the London Boroughs</li>
+          ) : null}
+          {location === "London" ? null : (
+            <li>London average: {cardData.londonData?.toLocaleString("en-UK")}</li>
+          )}
+          {location === "United Kingdom" ? null : cardData.ukData ? (
+            <li>UK average: {cardData.ukData?.toLocaleString("en-UK")}</li>
+          ) : null}
           {cardData.change === null ? null : (cardData.change > 0 ? (
             <li>
               This has increased by {cardData.change?.toPrecision(3)}% from the
@@ -42,15 +51,6 @@ export default function Card({ dataset, location }) {
               previous collection ({cardData.previousYear})
             </li>
           ))}
-          {cardData.ranking > 0 ? (
-            <li>This ranks {cardData.ranking}/33 of the London Boroughs</li>
-          ) : null}
-          {location === "London" ? null : (
-            <li>London: {cardData.londonData?.toLocaleString("en-UK")}</li>
-          )}
-          {location === "United Kingdom" ? null : cardData.ukData ? (
-            <li>UK: {cardData.ukData?.toLocaleString("en-UK")}</li>
-          ) : null}
         </ul>
 
         <section className="flex justify-between items-center ">

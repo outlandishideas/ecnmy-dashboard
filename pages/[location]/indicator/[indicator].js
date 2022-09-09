@@ -96,7 +96,7 @@ export default function Indicator({
 
   return (
     <main>
-      <h1 className="blue capitalize font-bold text-center text-3xl p-5">
+      <h1 className="blue capitalize-first font-bold text-center text-3xl p-5">
         {locationDataset.indicator} in {location}
       </h1>
 

@@ -24,6 +24,7 @@ export default function StyleSelect({
         defaultValue={defaultValue}
         onChange={setChange}
         tabIndex={tabIndex}
+        className='select-with-caps'
       />
     </fieldset>
   );

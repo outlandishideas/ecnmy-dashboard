@@ -93,6 +93,10 @@ a.emphasised {
   font-size: 20px;
 }
 
+.select-with-caps div::first-letter {
+  text-transform: uppercase;
+}
+
 .capitalize-first::first-letter {
   text-transform: uppercase;
 }
