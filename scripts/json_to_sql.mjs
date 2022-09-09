@@ -54,7 +54,7 @@ const jsonToSql = async () => {
       maleLifeExpectancy
     )}', '${JSON.stringify(maleLifeExpectancyMetadata)}'),\n
   `;
-  sqlOutput += `('total JSA and UC claimants', '${JSON.stringify(
+  sqlOutput += `('unemployment benefits claimants', '${JSON.stringify(
     totalClaim
   )}', '${JSON.stringify(totalClaimMetadata)}'),\n`;
   sqlOutput += `('part-time low paid residents', '${JSON.stringify(
