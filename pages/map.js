@@ -5,10 +5,11 @@ import {
   selectDistinctTopicsWithData,
   selectTopicsWithLinkedData,
 } from "../database/model";
-import StyleSelect from "../components/StyleSelect";
 import selectOptions from "../utils/selectOptions";
 import useChoropleth from "../components/hooks/useChoropleth";
 import Loading from "../components/Loading";
+import StyleSelect from "../components/StyleSelect";
+import Tooltip from "../components/Tooltip";
 
 const sortByYearReturningOneYear = (arr, slice) => {
   return arr
@@ -51,7 +52,7 @@ export default function Map({
   const [topic, setTopic] = useState({ value: "All", label: "All" });
   const [indicator, setIndicator] = useState(null);
   const [indicatorOptions, setIndicatorOptions] = useState(
-    selectOptions(filteredAllIndicators)
+    selectOptions(filteredAllIndicators, 'indicator', 'indicator_group')
   );
   const [mapUrl, mapLoading, setMapDataAndIndicator] = useChoropleth();
 
@@ -61,7 +62,7 @@ export default function Map({
       topic.value === "All"
         ? filteredAllIndicators
         : allIndicatorOptions.filter((option) => option.name === topic.value);
-    const newOptions = selectOptions(filteredIndicators, "indicator");
+    const newOptions = selectOptions(filteredIndicators, 'indicator', 'indicator_group');
     setIndicatorOptions(newOptions);
   }, [topic, allIndicatorOptions, filteredAllIndicators]);
 
@@ -123,6 +124,16 @@ export default function Map({
       </form>
 
       <div className={`w-1/2 h-[800px] m-auto`}>
+        { indicator?.value ? (
+          <h2 className="text-[30px] leading-relaxed font-semibold">
+            A map of {indicator?.value} in London
+            <Tooltip
+              indicator={indicator?.value}
+              indicatorGroup={indicator?.indicator_group}
+            />
+          </h2>
+        ) : null}
+
         {mapLoading ? (
           <Loading />
         ) : (

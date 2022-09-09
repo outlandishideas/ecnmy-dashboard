@@ -19,8 +19,8 @@ export default async function dataVisualiser(
   } else if (chartType === "tables") {
     title = `Table: ${indicator} in ${location}`;
   } else if (chartType === "d3-maps-choropleth") {
-    title =
-      indicator === null ? " " : `A map of ${indicator} in London`;
+    // For maps we show title outside the embed, so we can put an interactive tooltip icon alongside it.
+    title = ' ';
   }
 
   //initialises empty chart
