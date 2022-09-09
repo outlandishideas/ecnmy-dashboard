@@ -23,8 +23,7 @@ export default function Footer() {
         <div className="flex flex-row flex-wrap items-start gap-4">
           <p className="text-[16px] py-1 font-medium max-w-xs mb-2 flex flex-wrap">
             <strong>Data Sources</strong>
-            This dashboard represents local data available from a range of
-            sources, current sources including the following:
+            Our dashboard uses data from the following sources:
           </p>
 
           <div className="justify-around items-center gap-2">
