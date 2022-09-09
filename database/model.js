@@ -22,7 +22,7 @@ const selectDistinctTopicsWithData = async () => {
 
 const selectTopicsWithLinkedData = async () => {
   const SELECT_TOPICS = /*SQL*/ `
-  SELECT topics.name, datasets.indicator
+  SELECT topics.name, datasets.indicator, datasets.metadata::json->'indicatorGroup' AS indicator_group
   FROM topics
     INNER JOIN datasets_topics ON topics.id = datasets_topics.topic_id
     INNER JOIN datasets ON datasets_topics.dataset_id = datasets.id
