@@ -37,7 +37,7 @@ export default function Footer() {
                         className="w-44"
                         rel="noreferrer"
                         target="_blank"
-                        data-test-id={source.name + '-logo'}
+                        data-test-id={source.name.replace(' ', '-') + '-logo'}
                       >
                         <picture>
                           <img
