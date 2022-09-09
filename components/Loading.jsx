@@ -7,8 +7,8 @@ export default function Loading() {
         <Image
           src={LoadingGif}
           alt="Loading spinner"
-          width={300}
-          height={200}
+          width={320}
+          height={180}
         />
         <p className="text-xl animate-pulse">Loading ......</p>
       </div>
