@@ -21,27 +21,36 @@ export default function SanityPreloadsState(props) {
   useEffect(() => {
     const getDataSources = async () => {
       const query = '*[_type == "sources"] {sources}';
-      const dataSources = (await sanityClient.fetch(query))[0].sources; // First/only item has sources array.
-
-      setSanityPreloadsState({...sanityPreloadsState, dataSources})
+      return sanityClient.fetch(query);
     }
 
     const getHelp = async () => {
       const query = '*[_type == "help"] {page, title, help}';
-      const help = await sanityClient.fetch(query);
-      setSanityPreloadsState({...sanityPreloadsState, help})
+      return sanityClient.fetch(query);
     }
 
     const getIndicators = async () => {
       const query = '*[_type == "indicator"] {name, tooltip}';
-      const indicators = await sanityClient.fetch(query);
-      setSanityPreloadsState({...sanityPreloadsState, indicators})
+      return sanityClient.fetch(query);
     }
 
-    getDataSources();
-    getHelp();
-    getIndicators();
-  }, [])
+    Promise.all([
+      getDataSources(),
+      getHelp(),
+      getIndicators(),
+    ]).then(([dataSourcesQResult, help, indicators]) => {
+      console.log('promises promises', dataSourcesQResult);
+
+      const dataSources = dataSourcesQResult[0].sources; // First + only item has the ordered sources array.
+
+      setSanityPreloadsState({
+        ...sanityPreloadsState,
+        dataSources,
+        help,
+        indicators,
+      })
+    })
+  }, [setSanityPreloadsState])
 
   return (
     <SanityPreloadsContext.Provider value={[sanityPreloadsState]}>
