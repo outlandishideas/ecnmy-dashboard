@@ -100,13 +100,13 @@ export default function Indicator({
         {locationDataset.indicator} in {location}
       </h1>
 
-      { indicatorDetail && (
-        <p className="flex items-center flex-wrap justify-around detail">
-          {indicatorDetail}
-        </p>
-      )}
-
       <div className="flex items-center flex-wrap justify-around">
+        { indicatorDetail && (
+          <pre className="detail flex flex-wrap  items-center justify-around">
+            {indicatorDetail}
+          </pre>
+        )}
+
         <div className="p-5 rounded-xl  max-w-[400px]">
           <h2>
             <span className="font-semibold">Name of study:</span>{" "}

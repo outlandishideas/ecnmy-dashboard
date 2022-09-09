@@ -113,9 +113,10 @@ a.emphasised {
 }
 
 .detail {
-  background: #955afb;
-  color: #fff;
+  white-space: pre-wrap;
   padding: 1rem;
+  font-family: "Sofia", "Lato", BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 h3.text-xxl {
