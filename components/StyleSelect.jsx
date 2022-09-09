@@ -14,7 +14,7 @@ export default function StyleSelect({
         htmlFor={`select-${id}`}
         className={`capitalize ${invisible ? "invisible" : null}`}
       >
-        Select {id}
+        Select {id === 'indicator' ? 'data type' : id}
       </label>
       <Select
         id={`select-${id}`}
