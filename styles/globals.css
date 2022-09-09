@@ -57,6 +57,13 @@ a {
   text-decoration: none;
 }
 
+a.emphasised {
+  text-decoration: underline;
+  color: #AD1414;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 * {
   box-sizing: border-box;
 }

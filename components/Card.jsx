@@ -1,10 +1,20 @@
 import Link from "next/link";
+import React, { useState } from 'react';
+
 import ToolTip from "./Tooltip";
-import React from "react";
 
 export default function Card({ dataset, location }) {
+  const [sourceDetailIsOpen, setSourceDetailIsOpen] = useState(false);
+
+  const toggleSourceDetail = () => {
+    setSourceDetailIsOpen(!sourceDetailIsOpen);
+  };
+
   const cardData = dataset.cardData;
-  if (cardData.isNull) return null;
+  if (cardData.isNull) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col w-1/4 justify-evenly min-w-[320px] max-w-[360px]">
       <div className="bg-ecnmy-white mb-1 flex flex-col rounded-t-lg">
@@ -45,16 +55,64 @@ export default function Card({ dataset, location }) {
 
         <section className="flex justify-between items-center ">
           <Link href={`/${location}/indicator/${dataset.indicator}`}>
-            <a className="underline font-semibold hover:font-bold text-[#AD1414]">
+            <a className="emphasised">
               More Info
             </a>
           </Link>
 
           <div className="flex items-center">
-            {dataset.metadata.source}
-            {", "}
-            {cardData.currentYear}
+            <a
+              onClick={toggleSourceDetail}
+              className="emphasised"
+            >
+              {dataset.metadata.source}
+              {", "}
+              {cardData.currentYear}
+            </a>
           </div>
+
+          { sourceDetailIsOpen ? (
+            <div className="greyed-bg fixed w-full h-screen top-0 left-0 z-[1]">
+              <div className="box relative h-auto rounded p-5 overflow-auto bg-ecnmy-white border">
+                <span
+                  className="close-icon bg-ecnmy-charcoal border text-white"
+                  onClick={toggleSourceDetail}
+                >
+                  x
+                </span>
+
+                <h2 className="text-[30px] leading-relaxed font-semibold">
+                  {`${dataset.metadata.source}, ${cardData.currentYear}`}
+                </h2>
+
+                <div className="text-ecnmy-charcoal text-base">
+                  <h3>
+                    <span className="font-semibold">Name of study:</span>{" "}
+                    <Link href={dataset.metadata.datasetLink}>
+                      <a className="underline text-blue-600 hover:text-ecnmy-navy visited:text-ecnmy-grape">
+                        {dataset.metadata.title}
+                      </a>
+                    </Link>
+                  </h3>
+                  <h3>
+                    <span className="font-semibold">Last updated:</span>{" "}
+                    {dataset.metadata.release_date.substring(0, 4)}
+                  </h3>
+                  {dataset.metadata.sampleSize ? (
+                    <h3>
+                      <span className="font-semibold">Sample size:</span>{" "}
+                      {dataset.metadata.sampleSize}
+                    </h3>
+                  ) : null}
+                  <p>
+                    <span className="font-semibold">Description:</span>{" "}
+                    {dataset.metadata.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ) : null
+        }
         </section>
       </div>
     </div>

@@ -21,7 +21,7 @@ export default function LocalStoryCard() {
         </section>
         <section className="w-full">
           <Link href={`https://weare.ecnmy.org/about-us/contact-us/`}>
-            <a className="underline font-semibold hover:font-bold text-[#AD1414]">
+            <a className="emphasised">
               More Info
             </a>
           </Link>
