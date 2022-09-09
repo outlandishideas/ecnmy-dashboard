@@ -1,7 +1,7 @@
-import Link from "next/link";
+import Link from 'next/link';
 import React, { useState } from 'react';
 
-import ToolTip from "./Tooltip";
+import IndicatorBadge from './IndicatorBadge';
 
 export default function Card({ dataset, location }) {
   const [sourceDetailIsOpen, setSourceDetailIsOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function Card({ dataset, location }) {
   return (
     <div className="flex flex-col w-1/4 justify-evenly min-w-[320px] max-w-[360px]">
       <div className="bg-ecnmy-white mb-1 flex flex-col rounded-t-lg">
-        <ToolTip
+        <IndicatorBadge
           indicator={dataset.indicator}
           indicatorGroup={dataset.metadata.indicatorGroup}
         />

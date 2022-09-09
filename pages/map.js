@@ -9,7 +9,7 @@ import selectOptions from "../utils/selectOptions";
 import useChoropleth from "../components/hooks/useChoropleth";
 import Loading from "../components/Loading";
 import StyleSelect from "../components/StyleSelect";
-import ToolTip from "../components/Tooltip";
+import Tooltip from "../components/Tooltip";
 
 const sortByYearReturningOneYear = (arr, slice) => {
   return arr
@@ -127,7 +127,7 @@ export default function Map({
         { indicator?.value ? (
           <h2 className="text-[30px] leading-relaxed font-semibold">
             A map of {indicator?.value} in London
-            <ToolTip
+            <Tooltip
               indicator={indicator?.value}
               indicatorGroup={indicator?.indicator_group}
             />
