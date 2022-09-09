@@ -7,7 +7,7 @@ export default function useDatawrapper(csv, indicator, location, chartType) {
   // Sends the details to datawrapper-proxy to then send to datawrapper
   useEffect(() => {
     if (!csv || !indicator) {
-      return
+      return () => [null, false];
     }
 
     setLoading(true);
