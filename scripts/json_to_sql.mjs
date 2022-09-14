@@ -5,6 +5,7 @@ import lowPay from '../dataFormatters/lowPay.mjs';
 import povertyRate from '../dataFormatters/povertyRate.mjs';
 import unemploymentBenefits from '../dataFormatters/unemploymentBenefits.mjs';
 import wellbeing from '../dataFormatters/wellbeing.mjs';
+import indicatorGroup from '../utils/indicatorGroup.js';
 
 /** jsonToSql is a scripting function that takes in inputted jsons with datasets
  * These jsons are then turned into something that is easy to automate in the code
@@ -13,19 +14,19 @@ import wellbeing from '../dataFormatters/wellbeing.mjs';
 const jsonToSql = async () => {
   const [happiness, happinessMetadata] = await wellbeing(
     "./datasets/happiness.json",
-    "happiness",
+    indicatorGroup("happiness"),
   );
   const [anxiety, anxietyMetadata] = await wellbeing(
     "./datasets/anxiety.json",
-    "anxiety",
+    indicatorGroup("anxiety"),
   );
   const [femaleLifeExpectancy, femaleLifeExpectancyMetadata] = await lifeExpectancy(
     "./datasets/female_life_expectancy.json",
-    "life expectancy",
+    indicatorGroup("life expectancy (female)"),
   );
   const [maleLifeExpectancy, maleLifeExpectancyMetadata] = await lifeExpectancy(
     "./datasets/male_life_expectancy.json",
-    "life expectancy",
+    indicatorGroup("life expectancy (male)"),
   );
   const [totalClaim, totalClaimMetadata] = await unemploymentBenefits();
   const [partTimeLowPay, partTimeLowPayMetadata] = await lowPay(

@@ -3,7 +3,8 @@ import Link from 'next/link';
 import useDatawrapper from "../../../components/hooks/useDatawrapper";
 import { selectDatasetByIndicator } from "../../../database/model";
 import Loading from "../../../components/Loading";
-import cardDataArranger from "../../../utils/cardDataArranger";
+import cardDataArranger from '../../../utils/cardDataArranger';
+import indicatorGroup from '../../../utils/indicatorGroup';
 import sanityClient from '../../../utils/sanityClient';
 
 export async function getServerSideProps({ params }) {
@@ -13,7 +14,7 @@ export async function getServerSideProps({ params }) {
 
   let indicatorDetail = null;
   const query = '*[_type == "indicator" && name == $indicator] {detail}';
-  const sanityParams = { indicator };
+  const sanityParams = { indicator: indicatorGroup(indicator) };
   const indicators = await sanityClient.fetch(query, sanityParams);
   if (indicators.length > 0) {
     indicatorDetail = indicators[0].detail;
