@@ -10,8 +10,6 @@ export default async function povertyRate(path, property) {
   const poverty = await jsonParser(path);
 
   poverty.data.forEach((item) => {
-    item.Geography = item.Borough;
-
     item.Time = '2014-01';
     item.Value = item[property];
   });

@@ -1,167 +1,177 @@
 {
   "data": [
     {
-      "Borough": "Barking and Dagenham",
+      "Geography code": "K02000001",
+      "Geography": "United Kingdom",
+      "Poverty rate": "22%"
+    },
+    {
+      "Geography code": "E12000007",
+      "Geography": "London",
+      "Poverty rate": "28%"
+    },
+    {
+      "Geography": "Barking and Dagenham",
       "Poverty rate": "28%",
       "Geography code": "E09000002"
     },
     {
-      "Borough": "Barnet",
+      "Geography": "Barnet",
       "Poverty rate": "23%",
       "Geography code": "E09000003"
     },
     {
-      "Borough": "Bexley",
+      "Geography": "Bexley",
       "Poverty rate": "16%",
       "Geography code": "E09000004"
     },
     {
-      "Borough": "Brent",
+      "Geography": "Brent",
       "Poverty rate": "33%",
       "Geography code": "E09000005"
     },
     {
-      "Borough": "Bromley",
+      "Geography": "Bromley",
       "Poverty rate": "15%",
       "Geography code": "E09000006"
     },
     {
-      "Borough": "Camden",
+      "Geography": "Camden",
       "Poverty rate": "32%",
       "Geography code": "E09000007"
     },
     {
-      "Borough": "City of London",
+      "Geography": "City of London",
       "Poverty rate": "16%",
       "Geography code": "E09000001"
     },
     {
-      "Borough": "Croydon",
+      "Geography": "Croydon",
       "Poverty rate": "22%",
       "Geography code": "E09000008"
     },
     {
-      "Borough": "Ealing",
+      "Geography": "Ealing",
       "Poverty rate": "29%",
       "Geography code": "E09000009"
     },
     {
-      "Borough": "Enfield",
+      "Geography": "Enfield",
       "Poverty rate": "27%",
       "Geography code": "E09000010"
     },
     {
-      "Borough": "Greenwich",
+      "Geography": "Greenwich",
       "Poverty rate": "26%",
       "Geography code": "E09000011"
     },
     {
-      "Borough": "Hackney",
+      "Geography": "Hackney",
       "Poverty rate": "36%",
       "Geography code": "E09000012"
     },
     {
-      "Borough": "Hammersmith and Fulham",
+      "Geography": "Hammersmith and Fulham",
       "Poverty rate": "31%",
       "Geography code": "E09000013"
     },
     {
-      "Borough": "Haringey",
+      "Geography": "Haringey",
       "Poverty rate": "34%",
       "Geography code": "E09000014"
     },
     {
-      "Borough": "Harrow",
+      "Geography": "Harrow",
       "Poverty rate": "23%",
       "Geography code": "E09000015"
     },
     {
-      "Borough": "Havering",
+      "Geography": "Havering",
       "Poverty rate": "17%",
       "Geography code": "E09000016"
     },
     {
-      "Borough": "Hillingdon",
+      "Geography": "Hillingdon",
       "Poverty rate": "22%",
       "Geography code": "E09000017"
     },
     {
-      "Borough": "Hounslow",
+      "Geography": "Hounslow",
       "Poverty rate": "25%",
       "Geography code": "E09000018"
     },
     {
-      "Borough": "Islington",
+      "Geography": "Islington",
       "Poverty rate": "34%",
       "Geography code": "E09000019"
     },
     {
-      "Borough": "Kensington and Chelsea",
+      "Geography": "Kensington and Chelsea",
       "Poverty rate": "28%",
       "Geography code": "E09000020"
     },
     {
-      "Borough": "Kingston upon Thames",
+      "Geography": "Kingston upon Thames",
       "Poverty rate": "18%",
       "Geography code": "E09000021"
     },
     {
-      "Borough": "Lambeth",
+      "Geography": "Lambeth",
       "Poverty rate": "30%",
       "Geography code": "E09000022"
     },
     {
-      "Borough": "Lewisham",
+      "Geography": "Lewisham",
       "Poverty rate": "26%",
       "Geography code": "E09000023"
     },
     {
-      "Borough": "Merton",
+      "Geography": "Merton",
       "Poverty rate": "20%",
       "Geography code": "E09000024"
     },
     {
-      "Borough": "Newham",
+      "Geography": "Newham",
       "Poverty rate": "37%",
       "Geography code": "E09000025"
     },
     {
-      "Borough": "Redbridge",
+      "Geography": "Redbridge",
       "Poverty rate": "25%",
       "Geography code": "E09000026"
     },
     {
-      "Borough": "Richmond upon Thames",
+      "Geography": "Richmond upon Thames",
       "Poverty rate": "15%",
       "Geography code": "E09000027"
     },
     {
-      "Borough": "Southwark",
+      "Geography": "Southwark",
       "Poverty rate": "31%",
       "Geography code": "E09000028"
     },
     {
-      "Borough": "Sutton",
+      "Geography": "Sutton",
       "Poverty rate": "16%",
       "Geography code": "E09000029"
     },
     {
-      "Borough": "Tower Hamlets",
+      "Geography": "Tower Hamlets",
       "Poverty rate": "39%",
       "Geography code": "E09000030"
     },
     {
-      "Borough": "Waltham Forest",
+      "Geography": "Waltham Forest",
       "Poverty rate": "28%",
       "Geography code": "E09000031"
     },
     {
-      "Borough": "Wandsworth",
+      "Geography": "Wandsworth",
       "Poverty rate": "22%",
       "Geography code": "E09000032"
     },
     {
-      "Borough": "Westminster",
+      "Geography": "Westminster",
       "Poverty rate": "30%",
       "Geography code": "E09000033"
     }
