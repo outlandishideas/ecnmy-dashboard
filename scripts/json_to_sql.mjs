@@ -2,6 +2,7 @@ import fs from 'fs';
 
 import lifeExpectancy from '../dataFormatters/lifeExpectancy.mjs';
 import lowPay from '../dataFormatters/lowPay.mjs';
+import povertyRate from '../dataFormatters/povertyRate.mjs';
 import unemploymentBenefits from '../dataFormatters/unemploymentBenefits.mjs';
 import wellbeing from '../dataFormatters/wellbeing.mjs';
 
@@ -32,6 +33,10 @@ const jsonToSql = async () => {
     'Percentage of part-time jobs held by residents that are low paid',
     'part-time',
   );
+  const [povertyRates, povertyRatesMetadata] = await povertyRate(
+    './datasets/poverty_rates_by_London_borough_2013_2014.json',
+    'Poverty rate',
+  );
 
   let sqlOutput = /*SQL*/ `BEGIN;\n\nINSERT INTO datasets (indicator, data, metadata) VALUES\n`;
 
@@ -60,6 +65,9 @@ const jsonToSql = async () => {
   sqlOutput += `('low paid jobs (part time)', '${JSON.stringify(
     partTimeLowPay
   )}', '${JSON.stringify(partTimeLowPayMetadata)}'),\n`;
+  sqlOutput += `('poverty rate', '${JSON.stringify(
+    povertyRates
+  )}', '${JSON.stringify(povertyRatesMetadata)}'),\n`;
 
   sqlOutput = sqlOutput.substring(0, sqlOutput.length - 2) + ";";
   sqlOutput += "\n\nCOMMIT;";
