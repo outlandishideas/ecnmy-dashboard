@@ -107,40 +107,44 @@ export default function Indicator({
           </pre>
         )}
 
-        <div className="h-[400px] min-w-[310px] flex-[1_1_50%] p-5">
-          {lineChartLoading === true ? (
-            <Loading />
-          ) : (
-            lineChartUrl ? (
-              <iframe
-                title={`A chart showing the change in ${indicator} in ${location}`}
-                id="datawrapper-chart-0jKkG"
-                src={lineChartUrl}
-                className="w-full min-w-full h-full"
-                scrolling="no"
-                frameBorder="0"
-              ></iframe>
-            ) : undefined
-          )}
-        </div>
+        {lineChartLoading || lineChartUrl ? (
+          <div className="h-[400px] min-w-[310px] flex-[1_1_50%] p-5">
+            {lineChartLoading === true ? (
+              <Loading />
+            ) : (
+              lineChartUrl ? (
+                <iframe
+                  title={`A chart showing the change in ${indicator} in ${location}`}
+                  id="datawrapper-chart-0jKkG"
+                  src={lineChartUrl}
+                  className="w-full min-w-full h-full"
+                  scrolling="no"
+                  frameBorder="0"
+                ></iframe>
+              ) : undefined
+            )}
+          </div>
+        ) : undefined}
 
-        <div className="min-w-[310px] flex-[1_1_50%] p-5">
-          {tableLoading === true ? (
-            <Loading />
-          ) : (
-            tableUrl ? (
-              <iframe
-                style={{ height: tableHeight }}
-                title={`A table for ${indicator} in ${location}`}
-                id="datawrapper-chart-0jKkG"
-                src={tableUrl}
-                className="w-full min-w-full h-full"
-                scrolling="no"
-                frameBorder="0"
-              ></iframe>
-            ) : undefined
-          )}
-        </div>
+        {tableLoading || tableUrl ? (
+          <div className="min-w-[310px] flex-[1_1_50%] p-5">
+            {tableLoading === true ? (
+              <Loading />
+            ) : (
+              tableUrl ? (
+                <iframe
+                  style={{ height: tableHeight }}
+                  title={`A table for ${indicator} in ${location}`}
+                  id="datawrapper-chart-0jKkG"
+                  src={tableUrl}
+                  className="w-full min-w-full h-full"
+                  scrolling="no"
+                  frameBorder="0"
+                ></iframe>
+              ) : undefined
+            )}
+          </div>
+        ) : undefined}
 
         <div className="flex-[1_1_50%] p-5">
           <h2>
