@@ -2,7 +2,7 @@
  * @param {string} indicator
  * @returns {string}
  */
-export function indicatorGroup (indicator) {
+const indicatorGroup = (indicator) => {
   if (indicator === 'poverty rate') {
     return 'poverty';
   }
@@ -17,3 +17,5 @@ export function indicatorGroup (indicator) {
 
   return indicator;
 }
+
+module.exports = indicatorGroup;

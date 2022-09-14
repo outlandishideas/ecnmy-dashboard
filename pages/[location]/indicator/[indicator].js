@@ -3,8 +3,8 @@ import Link from 'next/link';
 import useDatawrapper from "../../../components/hooks/useDatawrapper";
 import { selectDatasetByIndicator } from "../../../database/model";
 import Loading from "../../../components/Loading";
-import cardDataArranger from "../../../utils/cardDataArranger";
-import { indicatorGroup } from '../../../utils/indicatorGroup';
+import cardDataArranger from '../../../utils/cardDataArranger';
+import indicatorGroup from '../../../utils/indicatorGroup';
 import sanityClient from '../../../utils/sanityClient';
 
 export async function getServerSideProps({ params }) {
