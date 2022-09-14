@@ -35,10 +35,10 @@ export default function Card({ dataset, location }) {
             <li>{location} ranks {cardData.ranking}/33 of the London Boroughs</li>
           ) : null}
           {location === "London" ? null : (
-            <li>London average: {cardData.londonData?.toLocaleString("en-UK")}</li>
+            <li>For London the number is: {cardData.londonData?.toLocaleString("en-UK")}</li>
           )}
           {location === "United Kingdom" ? null : cardData.ukData ? (
-            <li>UK average: {cardData.ukData?.toLocaleString("en-UK")}</li>
+            <li>For UK the number is: {cardData.ukData?.toLocaleString("en-UK")}</li>
           ) : null}
           {cardData.change === null ? null : (cardData.change > 0 ? (
             <li>
