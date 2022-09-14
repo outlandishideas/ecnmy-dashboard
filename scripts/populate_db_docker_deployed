@@ -1,0 +1,18 @@
+#! /bin/sh
+
+# stop script when an error occurs
+set -e
+
+if [ -z "$DATABASE_URL" ]
+then
+  echo "\$DATABASE_URL is empty!"
+else
+  echo "Found \$DATABASE_URL in env"
+  echo "Now executing database init file in psql..."
+  psql $DATABASE_URL -q -f "./database/init.sql"
+  psql $DATABASE_URL -q -f "./database/locations.sql"
+  psql $DATABASE_URL -q -f "./database/datasets.sql"
+  psql $DATABASE_URL -q -f "./database/topics.sql"
+  psql $DATABASE_URL -q -f "./database/datasets_topics.sql"
+  echo "Populated database tables"
+fi

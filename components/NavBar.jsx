@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import How from "./How";
+import Help from "./Help";
 
 export default function NavBar() {
   const router = useRouter();
@@ -38,7 +38,7 @@ export default function NavBar() {
           </Link>
         </div>
         <div className="flex items-center">
-          <How />
+          <Help />
         </div>
       </section>
     </nav>

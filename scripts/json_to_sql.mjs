@@ -1,12 +1,11 @@
-import fs from "fs";
-import lifeExpectancy from "../utils/lifeExpectancy.mjs";
-import wellbeing from "../utils/wellbeing.mjs";
+import fs from 'fs';
 
-async function jsonParser(file) {
-  const rawdata = fs.readFileSync(file);
-  const data = await JSON.parse(rawdata);
-  return data;
-}
+import lifeExpectancy from '../dataFormatters/lifeExpectancy.mjs';
+import lowPay from '../dataFormatters/lowPay.mjs';
+import povertyRate from '../dataFormatters/povertyRate.mjs';
+import unemploymentBenefits from '../dataFormatters/unemploymentBenefits.mjs';
+import wellbeing from '../dataFormatters/wellbeing.mjs';
+import indicatorGroup from '../utils/indicatorGroup.js';
 
 /** jsonToSql is a scripting function that takes in inputted jsons with datasets
  * These jsons are then turned into something that is easy to automate in the code
@@ -15,54 +14,31 @@ async function jsonParser(file) {
 const jsonToSql = async () => {
   const [happiness, happinessMetadata] = await wellbeing(
     "./datasets/happiness.json",
-    ["happiness"]
+    indicatorGroup("happiness"),
   );
   const [anxiety, anxietyMetadata] = await wellbeing(
     "./datasets/anxiety.json",
-    ["anxiety"]
+    indicatorGroup("anxiety"),
   );
-  const [femaleLifeExpectancy, femaleLifeExpectancyMetadata] =
-    await lifeExpectancy("./datasets/female_life_expectancy.json", [
-      "life expectancy",
-    ]);
+  const [femaleLifeExpectancy, femaleLifeExpectancyMetadata] = await lifeExpectancy(
+    "./datasets/female_life_expectancy.json",
+    indicatorGroup("life expectancy (female)"),
+  );
   const [maleLifeExpectancy, maleLifeExpectancyMetadata] = await lifeExpectancy(
     "./datasets/male_life_expectancy.json",
-    ["life expectancy"]
+    indicatorGroup("life expectancy (male)"),
   );
-  const totalClaim = await jsonParser("./datasets/totalClaim.json");
+  const [totalClaim, totalClaimMetadata] = await unemploymentBenefits();
+  const [partTimeLowPay, partTimeLowPayMetadata] = await lowPay(
+    './datasets/London_jobs_low_paid.json',
+    'Percentage of part-time jobs held by residents that are low paid',
+    'part-time',
+  );
+  const [povertyRates, povertyRatesMetadata] = await povertyRate(
+    './datasets/poverty_rates_by_London_borough_2013_2014.json',
+    'Poverty rate',
+  );
 
-  const totalClaimData = totalClaim.data;
-
-  const tidyClaimData = totalClaimData.flatMap((item) => {
-    const Geography = item.Area;
-    const [_, ...entries] = Object.entries(item);
-    return entries.map((entry) => {
-      return {
-        Geography: Geography,
-        Time: entry[0].substring(4),
-        Value: entry[1],
-      };
-    });
-  });
-
-  totalClaim.data = tidyClaimData;
-  let totalClaimMetadata = {
-    description:
-      "This experimental series counts the number of people claiming Jobseeker''s Allowance plus those who claim Universal Credit and are required to seek work and be available for work and replaces the number of people claiming Jobseeker''s Allowance as the headline indicator of the number of people claiming benefits principally for the reason of being unemployed.",
-    downloads: null,
-    keywords: ["poverty", "universal credit", "jobseekers allowance"],
-    methodologies: {
-      href: "https://www.nomisweb.co.uk/query/asv2htm",
-      title: "Warnings and notes",
-    },
-    related_datasets: null,
-    title: "Claimant count by age and sex",
-    release_date: "2022-07-19",
-    source: "Nomis",
-    sampleSize: null,
-    tooltips: ["JSA", "UC"],
-    datasetLink: "https://www.nomisweb.co.uk/sources/cc",
-  };
   let sqlOutput = /*SQL*/ `BEGIN;\n\nINSERT INTO datasets (indicator, data, metadata) VALUES\n`;
 
   sqlOutput += `
@@ -84,9 +60,16 @@ const jsonToSql = async () => {
       maleLifeExpectancy
     )}', '${JSON.stringify(maleLifeExpectancyMetadata)}'),\n
   `;
-  sqlOutput += `('total JSA and UC claimants', '${JSON.stringify(
+  sqlOutput += `('unemployment benefits claimants', '${JSON.stringify(
     totalClaim
   )}', '${JSON.stringify(totalClaimMetadata)}'),\n`;
+  sqlOutput += `('low paid jobs (part time)', '${JSON.stringify(
+    partTimeLowPay
+  )}', '${JSON.stringify(partTimeLowPayMetadata)}'),\n`;
+  sqlOutput += `('poverty rate', '${JSON.stringify(
+    povertyRates
+  )}', '${JSON.stringify(povertyRatesMetadata)}'),\n`;
+
   sqlOutput = sqlOutput.substring(0, sqlOutput.length - 2) + ";";
   sqlOutput += "\n\nCOMMIT;";
 

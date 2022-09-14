@@ -18,19 +18,21 @@ describe("navigation", () => {
 
 describe("Homepage tests", () => {
   // Footertest
-  it("should navigate to ONS webiste ", () => {
+  it("should navigate to first test data provider web site", () => {
     cy.visit("/")
-      .get('[data-test-id="ons-logo"]')
+      .get('[data-test-id="Test-org-logo"]')
       .should("have.class", "w-44")
+      .should("have.attr", "href", "https://example.org")
       .click();
   });
   it("should navigate to ecnmy website", () => {
     cy.visit("/")
       .get('[data-test-id="ecmy-logo"]')
-      .should("have.attr", "href", "https://www.ecnmy.org/");
+      .should("have.attr", "href", "https://www.ecnmy.org/")
+      .click();
   });
   // Navbar
-  it(" navbar Home link should have the right attribute on all pagds ", () => {
+  it(" navbar Home link should have the right attribute on all pages ", () => {
     cy.visit("/").get("nav a:nth-of-type(1)").should("have.attr", "href", "/");
     cy.visit("/map")
       .get("nav a:nth-of-type(1)")
@@ -42,7 +44,7 @@ describe("Homepage tests", () => {
       .get("nav a:nth-of-type(1)")
       .should("have.attr", "href", "/");
   });
-  it(" navbar Map link should have the right attribute on all pagds ", () => {
+  it(" navbar Map link should have the right attribute on all pages ", () => {
     cy.visit("/")
       .get('[data-test-id="mapNavLink"]')
       .should("have.attr", "href", "/map");

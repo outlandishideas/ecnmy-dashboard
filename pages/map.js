@@ -1,13 +1,15 @@
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+
 import {
   selectDistinctTopicsWithData,
   selectTopicsWithLinkedData,
 } from "../database/model";
-import StyleSelect from "../components/StyleSelect";
 import selectOptions from "../utils/selectOptions";
-import { useState, useEffect } from "react";
 import useChoropleth from "../components/hooks/useChoropleth";
 import Loading from "../components/Loading";
-import { useRouter } from "next/router";
+import StyleSelect from "../components/StyleSelect";
+import Tooltip from "../components/Tooltip";
 
 const sortByYearReturningOneYear = (arr, slice) => {
   return arr
@@ -50,9 +52,9 @@ export default function Map({
   const [topic, setTopic] = useState({ value: "All", label: "All" });
   const [indicator, setIndicator] = useState(null);
   const [indicatorOptions, setIndicatorOptions] = useState(
-    selectOptions(filteredAllIndicators)
+    selectOptions(filteredAllIndicators, 'indicator', 'indicator_group')
   );
-  const [mapId, mapLoading, setMapData, setMapIndicator] = useChoropleth();
+  const [mapUrl, mapLoading, setMapDataAndIndicator] = useChoropleth();
 
   //filters viewable indicators on the basis of chosen topic
   useEffect(() => {
@@ -60,7 +62,7 @@ export default function Map({
       topic.value === "All"
         ? filteredAllIndicators
         : allIndicatorOptions.filter((option) => option.name === topic.value);
-    const newOptions = selectOptions(filteredIndicators, "indicator");
+    const newOptions = selectOptions(filteredIndicators, 'indicator', 'indicator_group');
     setIndicatorOptions(newOptions);
   }, [topic, allIndicatorOptions, filteredAllIndicators]);
 
@@ -78,11 +80,13 @@ export default function Map({
           const data = dataset.data.data
             .filter((dataset) => dataset.Geography !== "London")
             .filter((dataset) => dataset.Geography !== "United Kingdom");
-          setMapData(sortByYearReturningOneYear(data, [0, 33]));
-          setMapIndicator(indicatorToFilter);
+          setMapDataAndIndicator({
+            dataset: sortByYearReturningOneYear(data, [0, 33]),
+            indicator: indicatorToFilter,
+          });
         });
     }
-  }, [setMapData, indicator, setMapIndicator]);
+  }, [setMapDataAndIndicator, indicator]);
 
   //clicking a borough on the map redirects the user to the relevant indicator page
   const router = useRouter();
@@ -120,16 +124,28 @@ export default function Map({
       </form>
 
       <div className={`w-1/2 h-[800px] m-auto`}>
+        { indicator?.value ? (
+          <h2 className="text-[30px] leading-relaxed font-semibold">
+            A map of {indicator?.value} in London
+            <Tooltip
+              indicator={indicator?.value}
+              indicatorGroup={indicator?.indicator_group}
+            />
+          </h2>
+        ) : null}
+
         {mapLoading ? (
           <Loading />
         ) : (
+          mapUrl ? (
           <iframe
-            title={`choropleth showing ${indicator?.value} in London`}
-            src={`https://datawrapper.dwcdn.net/${mapId}/1/`}
+            title={`Map of ${indicator?.value} in London`}
+            src={mapUrl}
             className="w-full min-w-full h-full"
             scrolling="no"
             frameBorder="0"
           ></iframe>
+          ) : undefined
         )}
       </div>
     </>

@@ -1,0 +1,179 @@
+{
+  "data": [
+    {
+      "Geography code": "K02000001",
+      "Geography": "United Kingdom",
+      "Poverty rate": "22%"
+    },
+    {
+      "Geography code": "E12000007",
+      "Geography": "London",
+      "Poverty rate": "28%"
+    },
+    {
+      "Geography": "Barking and Dagenham",
+      "Poverty rate": "28%",
+      "Geography code": "E09000002"
+    },
+    {
+      "Geography": "Barnet",
+      "Poverty rate": "23%",
+      "Geography code": "E09000003"
+    },
+    {
+      "Geography": "Bexley",
+      "Poverty rate": "16%",
+      "Geography code": "E09000004"
+    },
+    {
+      "Geography": "Brent",
+      "Poverty rate": "33%",
+      "Geography code": "E09000005"
+    },
+    {
+      "Geography": "Bromley",
+      "Poverty rate": "15%",
+      "Geography code": "E09000006"
+    },
+    {
+      "Geography": "Camden",
+      "Poverty rate": "32%",
+      "Geography code": "E09000007"
+    },
+    {
+      "Geography": "City of London",
+      "Poverty rate": "16%",
+      "Geography code": "E09000001"
+    },
+    {
+      "Geography": "Croydon",
+      "Poverty rate": "22%",
+      "Geography code": "E09000008"
+    },
+    {
+      "Geography": "Ealing",
+      "Poverty rate": "29%",
+      "Geography code": "E09000009"
+    },
+    {
+      "Geography": "Enfield",
+      "Poverty rate": "27%",
+      "Geography code": "E09000010"
+    },
+    {
+      "Geography": "Greenwich",
+      "Poverty rate": "26%",
+      "Geography code": "E09000011"
+    },
+    {
+      "Geography": "Hackney",
+      "Poverty rate": "36%",
+      "Geography code": "E09000012"
+    },
+    {
+      "Geography": "Hammersmith and Fulham",
+      "Poverty rate": "31%",
+      "Geography code": "E09000013"
+    },
+    {
+      "Geography": "Haringey",
+      "Poverty rate": "34%",
+      "Geography code": "E09000014"
+    },
+    {
+      "Geography": "Harrow",
+      "Poverty rate": "23%",
+      "Geography code": "E09000015"
+    },
+    {
+      "Geography": "Havering",
+      "Poverty rate": "17%",
+      "Geography code": "E09000016"
+    },
+    {
+      "Geography": "Hillingdon",
+      "Poverty rate": "22%",
+      "Geography code": "E09000017"
+    },
+    {
+      "Geography": "Hounslow",
+      "Poverty rate": "25%",
+      "Geography code": "E09000018"
+    },
+    {
+      "Geography": "Islington",
+      "Poverty rate": "34%",
+      "Geography code": "E09000019"
+    },
+    {
+      "Geography": "Kensington and Chelsea",
+      "Poverty rate": "28%",
+      "Geography code": "E09000020"
+    },
+    {
+      "Geography": "Kingston upon Thames",
+      "Poverty rate": "18%",
+      "Geography code": "E09000021"
+    },
+    {
+      "Geography": "Lambeth",
+      "Poverty rate": "30%",
+      "Geography code": "E09000022"
+    },
+    {
+      "Geography": "Lewisham",
+      "Poverty rate": "26%",
+      "Geography code": "E09000023"
+    },
+    {
+      "Geography": "Merton",
+      "Poverty rate": "20%",
+      "Geography code": "E09000024"
+    },
+    {
+      "Geography": "Newham",
+      "Poverty rate": "37%",
+      "Geography code": "E09000025"
+    },
+    {
+      "Geography": "Redbridge",
+      "Poverty rate": "25%",
+      "Geography code": "E09000026"
+    },
+    {
+      "Geography": "Richmond upon Thames",
+      "Poverty rate": "15%",
+      "Geography code": "E09000027"
+    },
+    {
+      "Geography": "Southwark",
+      "Poverty rate": "31%",
+      "Geography code": "E09000028"
+    },
+    {
+      "Geography": "Sutton",
+      "Poverty rate": "16%",
+      "Geography code": "E09000029"
+    },
+    {
+      "Geography": "Tower Hamlets",
+      "Poverty rate": "39%",
+      "Geography code": "E09000030"
+    },
+    {
+      "Geography": "Waltham Forest",
+      "Poverty rate": "28%",
+      "Geography code": "E09000031"
+    },
+    {
+      "Geography": "Wandsworth",
+      "Poverty rate": "22%",
+      "Geography code": "E09000032"
+    },
+    {
+      "Geography": "Westminster",
+      "Poverty rate": "30%",
+      "Geography code": "E09000033"
+    }
+  ]
+}

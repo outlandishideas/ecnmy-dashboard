@@ -18,6 +18,7 @@ export async function getServerSideProps() {
     { value: "All", label: "All" },
     ...selectOptions(topics),
   ];
+
   return { props: { topicOptions, locationOptions } };
 }
 

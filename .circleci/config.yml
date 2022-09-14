@@ -1,0 +1,69 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@8.1.2
+  aws-ecs: circleci/aws-ecs@3.1.0
+
+jobs:
+  # For now, just lint because tests are e2e and we don't have time to work out running them
+  # unattended within this sprint.
+  lint:
+    docker:
+      - image: cimg/node:16.7
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+      - run: npm install --quiet
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+      - run: npm run lint
+
+workflows:
+  lint:
+    jobs:
+      - lint
+  deploy-staging:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          filters:
+            branches:
+              only:
+                - develop
+          dockerfile: deploy/Dockerfile
+          extra-build-args: '--build-arg NEXT_PUBLIC_SANITY_PROJECT_ID=${NEXT_PUBLIC_SANITY_PROJECT_ID}'
+          registry-id: AWS_REGISTRY_ID
+          repo: 'staging-ecnmy-dashbd'
+          region: '${AWS_REGION}'
+          tag: 'staging,staging-${CIRCLE_SHA1}'
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          aws-region: AWS_REGION
+          family: 'ol-ecs-staging-ecnmy-dashbd'
+          cluster: 'ol-ecs-staging-shared'
+          service-name: 'staging-ecnmy-dashbd'
+# No Production for now to keep config simple + cost low.
+  # deploy-production:
+  #   jobs:
+  #     - aws-ecr/build-and-push-image:
+  #         filters:
+  #           branches:
+  #             only:
+  #               - main
+  #         dockerfile: deploy/Dockerfile
+  #         extra-build-args: '--build-arg NEXT_PUBLIC_SANITY_PROJECT_ID=${NEXT_PUBLIC_SANITY_PROJECT_ID}'
+  #         registry-id: AWS_REGISTRY_ID
+  #         repo: 'production-ecnmy-dashbd'
+  #         region: '${AWS_REGION}'
+  #         tag: 'production,production-${CIRCLE_SHA1}'
+  #     - aws-ecs/deploy-service-update:
+  #         requires:
+  #           - aws-ecr/build-and-push-image
+  #         aws-region: AWS_REGION
+  #         family: 'ol-ecs-production-ecnmy-dashbd'
+  #         cluster-name: 'ol-ecs-production-shared'
+  #         service-name: 'production-ecnmy-dashbd'

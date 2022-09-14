@@ -57,11 +57,16 @@ a {
   text-decoration: none;
 }
 
+a.emphasised {
+  text-decoration: underline;
+  color: #AD1414;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 * {
   box-sizing: border-box;
 }
-
-
 
 .greyed-bg {
   background: #00000050;
@@ -88,6 +93,42 @@ a {
   font-size: 20px;
 }
 
+.select-with-caps div::first-letter {
+  text-transform: uppercase;
+}
+
 .capitalize-first::first-letter {
   text-transform: uppercase;
+}
+
+.tooltip-wrapper {
+  position: relative; /* Ensure floating expanded boxes' absolute position works */
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+.tooltip {
+  margin-right: 0.25rem; /* Make this look more aligned alongside <h2/> 0.75rem left padding */
+}
+
+.tooltip-expansion {
+  min-width: 10rem;
+  text-align: center;
+}
+
+.detail {
+  white-space: pre-wrap;
+  padding: 1rem;
+  font-family: "Sofia", "Lato", BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.source-logo {
+  margin: 1rem;
+  align-self: center;
+}
+
+h3.text-xxl {
+  font-size: 3.375rem;
+  line-height: 3.75rem;
 }

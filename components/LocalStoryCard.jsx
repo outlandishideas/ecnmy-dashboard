@@ -15,13 +15,12 @@ export default function LocalStoryCard() {
         <ul className="list-disc m-4 text-base"></ul>
         <section className="flex justify-between items-center">
           <div className="flex items-center">
-            Find out more about how to access a network of contributors who can
-            share their lived experience of economic issues in your local area.
+            Access our network of contributors who can share their lived experience of this economic issue in this local area.
           </div>
         </section>
         <section className="w-full">
           <Link href={`https://weare.ecnmy.org/about-us/contact-us/`}>
-            <a className="underline font-semibold hover:font-bold text-[#AD1414]">
+            <a className="emphasised">
               More Info
             </a>
           </Link>

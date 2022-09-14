@@ -1,41 +1,46 @@
 import { useState, useEffect } from "react";
 
-export default function useDatawrapper() {
-  const [chartId, setChartId] = useState(null);
-  const [loading, setLoading] = useState(null);
-  const [dataset, setDataset] = useState(null);
-  const [indicator, setIndicator] = useState(null);
-  const [csv, setCsv] = useState(null);
+function buildCsv(dataset, indicator) {
+  let csv = `Location,${indicator}\n`;
+  if (dataset !== null) {
+    dataset.forEach((datum) => {
+      csv += `${datum["Geography"]},${datum["Value"]}\n`;
+    });
+  }
 
-  // this comes into action when the dataset and indicator changes creating a new csv to send to datawrapper
-  useEffect(() => {
-    let newCsv = `Location,${indicator}\n`;
-    if (dataset !== null) {
-      dataset.forEach((datum) => {
-        newCsv += `${datum["Geography"]},${datum["Value"]}\n`;
-      });
-      setCsv(newCsv);
-    }
-  }, [dataset, indicator]);
+  return csv;
+}
+
+export default function useDatawrapper() {
+  const [chartUrl, setChartUrl] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [datasetAndIndicator, setDatasetAndIndicator] = useState({
+    dataset: null, // Array of objects. We'll convert with `buildCsv()` prior to calling out to Datawrapper.
+    indicator: null,
+  });
 
   // Send the datawrapper-proxy the details needed to send to datawrapper
   useEffect(() => {
+    if (!datasetAndIndicator.indicator) {
+      return
+    }
+
     setLoading(true);
     fetch("/api/datawrapper-proxy", {
       method: "POST",
       body: JSON.stringify({
-        csv,
-        indicator,
+        csv: buildCsv(datasetAndIndicator.dataset, datasetAndIndicator.indicator),
+        indicator: datasetAndIndicator.indicator,
         location: null,
         chartType: "d3-maps-choropleth",
       }),
     })
       .then((resolve) => resolve.json())
       .then((resolve) => {
-        setChartId(resolve.chartId);
+        setChartUrl(resolve.chartUrl);
         setLoading(false);
       });
-  }, [csv, indicator]);
+  }, [datasetAndIndicator]);
 
-  return [chartId, loading, setDataset, setIndicator];
+  return [chartUrl, loading, setDatasetAndIndicator];
 }

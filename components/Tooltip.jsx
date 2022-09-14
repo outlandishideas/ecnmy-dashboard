@@ -1,50 +1,51 @@
-import { dictionary } from "../database/dictionary";
-import { useState } from "react";
+import { useImperativeHandle, useState } from 'react';
 
-export default function ToolTip({ indicator, tooltips }) {
+import { useSanityPreloads } from './SanityPreloads';
+
+export default function Tooltip({ indicator, indicatorGroup, outerHover = false }) {
   const [hover, setHover] = useState(false);
+  const [sanityPreloadsState, setSanityPreloadsState] = useSanityPreloads();
+
+  const indicators = sanityPreloadsState.indicators || [];
+  const matchedIndicator = indicators.find(indicator => indicator.name === indicatorGroup);
 
   function handleHover() {
     setHover(!hover);
   }
 
   return (
-    <h2 className=" relative overflow-visible bg-ecnmy-grape self-center text-ecnmy-white m-3 p-2 text-center flex justify-between rounded-lg w-10/12 text-lg font-medium">
-      <span></span>
-      <span
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
-        onFocus={handleHover}
-        onBlur={handleHover}
-        className="capitalize-first"
-      >
-        {indicator}
-      </span>
-      <span
-        tabIndex={0}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
-        onFocus={handleHover}
-        onBlur={handleHover}
-      >
-        &#9432;
-      </span>
-
-      <span
+    <div className="tooltip-wrapper">
+    {
+      matchedIndicator ? (
+        <span
+          className="tooltip"
+          tabIndex={0}
+          onMouseEnter={handleHover}
+          onMouseLeave={handleHover}
+          onFocus={handleHover}
+          onBlur={handleHover}
+        >
+          &#9432;
+        </span>
+      ) : null
+    }
+    {
+      matchedIndicator ? (
+        <span
         className={`${
-          hover
-            ? "absolute inset-x-0 bottom-12 bg-ecnmy-black rounded-lg text-ecnmy-white p-2 text-sm capitalize-first"
+          (hover || outerHover)
+            ? "tooltip-expansion absolute inset-x-0 bottom-12 bg-ecnmy-black rounded-lg text-ecnmy-white p-2 text-sm capitalize-first"
             : "hidden"
         }`}
-      >
-        <ul>
-          {tooltips.map((tooltip, index) => (
-            <li key={index}>
-              {tooltip}: {dictionary[tooltip]}
+        >
+          <ul>
+            <li>
+              {matchedIndicator.tooltip}
             </li>
-          ))}
-        </ul>
-      </span>
-    </h2>
+          </ul>
+        </span>
+      ) : null
+    }
+    </div>
   );
 }

@@ -14,15 +14,17 @@ export default function StyleSelect({
         htmlFor={`select-${id}`}
         className={`capitalize ${invisible ? "invisible" : null}`}
       >
-        Select {id}
+        Select {id === 'indicator' ? 'data type' : id}
       </label>
       <Select
         id={`select-${id}`}
+        instanceId={`select-${id}`}
         name={id}
         options={options}
         defaultValue={defaultValue}
         onChange={setChange}
         tabIndex={tabIndex}
+        className='select-with-caps'
       />
     </fieldset>
   );

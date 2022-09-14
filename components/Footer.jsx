@@ -1,35 +1,62 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from 'react';
+import imageUrlBuilder from '@sanity/image-url'
+
 import ecnmyLogo from "../public/images/ecnmy-logo-white-background.png";
-import onsLogo from "../public/images/ons-logo-white-background.png";
+import { useSanityPreloads } from './SanityPreloads.jsx';
+import sanityClient from '../utils/sanityClient'
+
+const sanityImageBuilder = imageUrlBuilder(sanityClient);
+
 export default function Footer() {
+  const [sanityPreloadsState, setSanityPreloadsState] = useSanityPreloads();
+
+  useEffect(() => {
+    // No-op – make sure we load in new Sanity preloads state and get sources, as it's async
+    // + the footer renders right away.
+  }, [sanityPreloadsState]);
+
   return (
     <>
       <footer className="text-xs pt-6 pb-8 px-11 flex justify-around items-center flex-wrap border-solid border-ecnmy-charcoal border-t-2 border-b-2">
         <div className="flex flex-row flex-wrap items-start gap-4">
           <p className="text-[16px] py-1 font-medium max-w-xs mb-2 flex flex-wrap">
             <strong>Data Sources</strong>
-            This dashboard represents local data available from a range of
-            sources, current sources including the following:
+            Our dashboard uses data from the following sources:
           </p>
 
-          <div className="flex flex-wrap justify-around items-center gap-2">
-            <Link href="https://www.ons.gov.uk/">
-              <a
-                className="w-44"
-                rel="noreferrer"
-                target="_blank"
-                data-test-id="ons-logo"
-              >
-                <Image
-                  src={onsLogo}
-                  alt="logo for the ONS with English and Welsh text (Office of National Statistics; Swyddfa Ystadegau Gwladol)"
-                  // width={120}
-                  // height={40}
-                  className=""
-                />
-              </a>
-            </Link>
+          <div className="justify-around items-center gap-2">
+            <ul className="flex flex-row flex-wrap">
+              {
+                sanityPreloadsState.dataSources && sanityPreloadsState.dataSources.map((source, ii) => (
+                  <li key={ii} className="source-logo">
+                    <Link href={source.url}>
+                      <a
+                        className="w-44"
+                        rel="noreferrer"
+                        target="_blank"
+                        data-test-id={source.name.replace(' ', '-') + '-logo'}
+                      >
+                        <picture>
+                          <img
+                            src={
+                              sanityImageBuilder
+                                .image(source.logo)
+                                .auto('format') // webp if supported
+                                .height(50)
+                                .quality(100)
+                                .url()
+                              }
+                            alt={source.name}
+                          />
+                        </picture>
+                      </a>
+                    </Link>
+                  </li>
+                ))
+              }
+            </ul>
           </div>
         </div>
       </footer>
@@ -44,9 +71,6 @@ export default function Footer() {
             <Image
               src={ecnmyLogo}
               alt="logo for the charity 'Economy'"
-              // width=""
-              // height=""
-              className=""
             />
           </a>
         </Link>

@@ -1,13 +1,24 @@
+import Link from 'next/link';
+
 import useDatawrapper from "../../../components/hooks/useDatawrapper";
 import { selectDatasetByIndicator } from "../../../database/model";
-import cardDataArranger from "../../../utils/cardDataArranger";
 import Loading from "../../../components/Loading";
-import Link from "next/link";
+import cardDataArranger from '../../../utils/cardDataArranger';
+import indicatorGroup from '../../../utils/indicatorGroup';
+import sanityClient from '../../../utils/sanityClient';
 
 export async function getServerSideProps({ params }) {
   // Get the parameters of the url
   const indicator = params.indicator;
   const location = params.location;
+
+  let indicatorDetail = null;
+  const query = '*[_type == "indicator" && name == $indicator] {detail}';
+  const sanityParams = { indicator: indicatorGroup(indicator) };
+  const indicators = await sanityClient.fetch(query, sanityParams);
+  if (indicators.length > 0) {
+    indicatorDetail = indicators[0].detail;
+  }
 
   // Select the single dataset needed for the specific indicator
   const dataset = await selectDatasetByIndicator(indicator);
@@ -19,23 +30,29 @@ export async function getServerSideProps({ params }) {
   );
   const [locationDataset] = cardDataArranger([dataset], location);
 
-  // Starting the csvs to send to datawrapper-proxy
-  let chartCsv = `Year,${indicator}\n`;
-  let tableCsv = `Year,${indicator}\n`;
+  let chartCsv = null;
+  let tableCsv = null;
 
-  let boroughDataSortedByYearChart = boroughData.sort((a, b) => {
-    return parseInt(a.Time.substring(0, 4)) - parseInt(b.Time.substring(0, 4));
-  });
-  let boroughDataSortedByYearTable = boroughData.sort((a, b) => {
-    return parseInt(b.Time.substring(0, 4)) - parseInt(a.Time.substring(0, 4));
-  });
+  // Set up chart + table only if there's data for more than one point in time.
+  if (boroughData.length > 1) {
+    // Starting the csvs to send to datawrapper-proxy
+    chartCsv = `Year,${indicator}\n`;
+    tableCsv = `Year,${indicator}\n`;
 
-  boroughDataSortedByYearChart.map((datum) => {
-    chartCsv += `${datum["Time"].substring(0, 4)},${datum["Value"]}\n`;
-  });
-  boroughDataSortedByYearTable.map((datum) => {
-    tableCsv += `${datum["Time"]},${datum["Value"]}\n`;
-  });
+    let boroughDataSortedByYearChart = boroughData.sort((a, b) => {
+      return parseInt(a.Time.substring(0, 4)) - parseInt(b.Time.substring(0, 4));
+    });
+    let boroughDataSortedByYearTable = boroughData.sort((a, b) => {
+      return parseInt(b.Time.substring(0, 4)) - parseInt(a.Time.substring(0, 4));
+    });
+
+    boroughDataSortedByYearChart.map((datum) => {
+      chartCsv += `${datum["Time"].substring(0, 4)},${datum["Value"]}\n`;
+    });
+    boroughDataSortedByYearTable.map((datum) => {
+      tableCsv += `${datum["Time"]},${datum["Value"]}\n`;
+    });
+  }
 
   return {
     props: {
@@ -46,41 +63,91 @@ export async function getServerSideProps({ params }) {
       chartCsv,
       tableCsv,
       indicator,
+      indicatorDetail,
     },
   };
 }
 
 export default function Indicator({
   indicator,
+  indicatorDetail,
   location,
   metadata,
   locationDataset,
   chartCsv,
   tableCsv,
 }) {
-  const [lineChartId, lineChartLoading] = useDatawrapper(
+  // [null, false] if no CSV.
+  const [lineChartUrl, lineChartLoading] = useDatawrapper(
     chartCsv,
     indicator,
     location,
     "d3-lines"
   );
-  const [tableId, tableLoading] = useDatawrapper(
+
+  // [null, false] if no CSV.
+  const [tableUrl, tableLoading] = useDatawrapper(
     tableCsv,
     indicator,
     location,
     "tables"
   );
 
-  let x = tableCsv.length * 3.9;
-  let tableHeight = x.toString() + "px";
+  const tableHeight = tableCsv ? `${(tableCsv.length * 3.9).toString()}px` : '0';
 
   return (
     <main>
-      <h1 className="blue capitalize font-bold text-center text-3xl p-5">
+      <h1 className="blue capitalize-first font-bold text-center text-3xl p-5">
         {locationDataset.indicator} in {location}
       </h1>
+
       <div className="flex items-center flex-wrap justify-around">
-        <div className="p-5 rounded-xl  max-w-[400px]">
+        { indicatorDetail && (
+          <pre className="detail flex-[1_1_50%] p-5">
+            {indicatorDetail}
+          </pre>
+        )}
+
+        {lineChartLoading || lineChartUrl ? (
+          <div className="h-[400px] min-w-[310px] flex-[1_1_50%] p-5">
+            {lineChartLoading === true ? (
+              <Loading />
+            ) : (
+              lineChartUrl ? (
+                <iframe
+                  title={`A chart showing the change in ${indicator} in ${location}`}
+                  id="datawrapper-chart-0jKkG"
+                  src={lineChartUrl}
+                  className="w-full min-w-full h-full"
+                  scrolling="no"
+                  frameBorder="0"
+                ></iframe>
+              ) : undefined
+            )}
+          </div>
+        ) : undefined}
+
+        {tableLoading || tableUrl ? (
+          <div className="min-w-[310px] flex-[1_1_50%] p-5">
+            {tableLoading === true ? (
+              <Loading />
+            ) : (
+              tableUrl ? (
+                <iframe
+                  style={{ height: tableHeight }}
+                  title={`A table for ${indicator} in ${location}`}
+                  id="datawrapper-chart-0jKkG"
+                  src={tableUrl}
+                  className="w-full min-w-full h-full"
+                  scrolling="no"
+                  frameBorder="0"
+                ></iframe>
+              ) : undefined
+            )}
+          </div>
+        ) : undefined}
+
+        <div className="flex-[1_1_50%] p-5">
           <h2>
             <span className="font-semibold">Name of study:</span>{" "}
             <Link href={metadata.datasetLink}>
@@ -104,36 +171,6 @@ export default function Indicator({
             {metadata.description}
           </p>
         </div>
-        <div className="w-full h-[400px] w-full min-w-[310px] max-w-[610px] p-5">
-          {lineChartLoading === true ? (
-            <Loading />
-          ) : (
-            <iframe
-              title={`A chart showing the change in ${indicator} in ${location}`}
-              id="datawrapper-chart-0jKkG"
-              src={`https://datawrapper.dwcdn.net/${lineChartId}/1/`}
-              className="w-full min-w-full h-full"
-              scrolling="no"
-              frameBorder="0"
-            ></iframe>
-          )}
-        </div>
-      </div>
-
-      <div className="max-w-xl h-full m-auto border p-6">
-        {tableLoading === true ? (
-          <Loading />
-        ) : (
-          <iframe
-            style={{ height: tableHeight }}
-            title={`A table for ${indicator} in ${location}`}
-            id="datawrapper-chart-0jKkG"
-            src={`https://datawrapper.dwcdn.net/${tableId}/1/`}
-            className="w-full min-w-full h-full"
-            scrolling="no"
-            frameBorder="0"
-          ></iframe>
-        )}
       </div>
     </main>
   );
