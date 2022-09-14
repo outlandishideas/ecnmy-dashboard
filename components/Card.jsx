@@ -34,7 +34,7 @@ export default function Card({ dataset, location }) {
           {cardData.ranking > 0 ? (
             <li>{location} ranks {cardData.ranking}/33 of the London Boroughs</li>
           ) : null}
-          {location === "London" ? null : (
+          {(location === "London" || !cardData.londonData) ? null : (
             <li>For London the number is: {cardData.londonData?.toLocaleString("en-UK")}</li>
           )}
           {location === "United Kingdom" ? null : cardData.ukData ? (
