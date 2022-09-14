@@ -40,7 +40,14 @@ export default function Footer() {
                       >
                         <picture>
                           <img
-                            src={sanityImageBuilder.image(source.logo).width(150).url()}
+                            src={
+                              sanityImageBuilder
+                                .image(source.logo)
+                                .auto('format') // webp if supported
+                                .height(50)
+                                .quality(100)
+                                .url()
+                              }
                             alt={source.name}
                           />
                         </picture>
