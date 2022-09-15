@@ -57,15 +57,12 @@ export default async function dataVisualiser(
         },
         visualize: {
           basemap: "uk-lads-greater-london",
+          "legend": {
+            "labelMax": "Maxx",
+            "labelMin": "Minn",
+            "labels": "custom",
+          },
           "map-key-attr": "lad15nm",
-        },
-      },
-    }));
-
-    // This adds the hover tooltip for the choropleth
-    const addTooltip = await callDWAndLogErrors(`/charts/${chartId}`, 'PATCH', JSON.stringify({
-      metadata: {
-        visualize: {
           tooltip: {
             body: `{{ indicator }}`,
             title: "{{ location }}",
@@ -77,6 +74,8 @@ export default async function dataVisualiser(
         },
       },
     }));
+
+    console.log('patch done: ', patchResponse);
   }
 
   //publishes chart online with chartId in the URL
