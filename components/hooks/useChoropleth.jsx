@@ -11,6 +11,34 @@ function buildCsv(dataset, indicator) {
   return csv;
 }
 
+/**
+ * @param {string} dataset  Array of objects with `Value` keys.
+ * @returns { min: number, max: number }  Each rounded to 3 significant figures.
+ */
+function getRoundedMinMax(dataset) {
+  let minValue = undefined;
+  let maxValue = undefined;
+
+  dataset.forEach((datum) => {
+    if (!datum.Value) {
+      return; // Some data has blank string vals?
+    }
+
+    if (minValue === undefined || datum.Value < minValue) {
+      minValue = parseFloat(datum.Value);
+    }
+
+    if (maxValue === undefined || datum.Value > maxValue) {
+      maxValue = parseFloat(datum.Value);
+    }
+  });
+
+  return {
+    min: parseFloat(minValue.toPrecision(3)),
+    max: parseFloat(maxValue.toPrecision(3)),
+  };
+}
+
 export default function useDatawrapper() {
   const [chartUrl, setChartUrl] = useState(null);
   const [loading, setLoading] = useState(null);
@@ -25,6 +53,8 @@ export default function useDatawrapper() {
       return
     }
 
+    const minMax = getRoundedMinMax(datasetAndIndicator.dataset);
+
     setLoading(true);
     fetch("/api/datawrapper-proxy", {
       method: "POST",
@@ -33,6 +63,8 @@ export default function useDatawrapper() {
         indicator: datasetAndIndicator.indicator,
         location: null,
         chartType: "d3-maps-choropleth",
+        minValue: minMax.min,
+        maxValue: minMax.max,
       }),
     })
       .then((resolve) => resolve.json())
