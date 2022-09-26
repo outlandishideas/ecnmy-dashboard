@@ -11,7 +11,9 @@ export default async function dataVisualiser(
   indicatorCsv,
   indicator,
   location,
-  chartType
+  chartType,
+  minValue = undefined,
+  maxValue = undefined,
 ) {
   let title;
   if (chartType === "d3-lines") {
@@ -49,6 +51,17 @@ export default async function dataVisualiser(
 
   //for choropleth, sets basemap and adds tooltip
   if (chartType === "d3-maps-choropleth") {
+    let minLabel = 'Low';
+    let maxLabel = 'High';
+
+    if (minValue !== undefined) {
+      minLabel = `${minLabel} (${minValue})`;
+    }
+
+    if (maxValue !== undefined) {
+      maxLabel = `${maxLabel} (${maxValue})`;
+    }
+
     const patchResponse = await callDWAndLogErrors(`/charts/${chartId}`, 'PATCH', JSON.stringify({
       metadata: {
         axes: {
@@ -57,10 +70,14 @@ export default async function dataVisualiser(
         },
         visualize: {
           basemap: "uk-lads-greater-london",
-          "legend": {
-            "labelMax": "Maxx",
-            "labelMin": "Minn",
-            "labels": "custom",
+          colorscale: {
+            mode: 'continuous',
+            rangeCenter: ''
+          },
+          legend: {
+            labelMin: minLabel,
+            labelMax: maxLabel,
+            labels: 'custom',
           },
           "map-key-attr": "lad15nm",
           tooltip: {
