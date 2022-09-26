@@ -91,8 +91,6 @@ export default async function dataVisualiser(
         },
       },
     }));
-
-    console.log('patch done: ', patchResponse);
   }
 
   //publishes chart online with chartId in the URL
