@@ -52,12 +52,27 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.detail h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.detail h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.detail h3 {
+  font-size: 1.5rem;
+  font-weight: normal;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-a.emphasised {
+a.emphasised, .detail a {
   text-decoration: underline;
   color: #AD1414;
   font-weight: bold;
@@ -117,7 +132,6 @@ a.emphasised {
 }
 
 .detail {
-  white-space: pre-wrap;
   padding: 1rem;
   font-family: "Sofia", "Lato", BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;

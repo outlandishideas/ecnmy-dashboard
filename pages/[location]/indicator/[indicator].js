@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { PortableText } from '@portabletext/react'
 
 import useDatawrapper from "../../../components/hooks/useDatawrapper";
 import { selectDatasetByIndicator } from "../../../database/model";
@@ -12,12 +13,12 @@ export async function getServerSideProps({ params }) {
   const indicator = params.indicator;
   const location = params.location;
 
-  let indicatorDetail = null;
-  const query = '*[_type == "indicator" && name == $indicator] {detail}';
+  let indicatorDetails = null;
+  const query = '*[_type == "indicator" && name == $indicator] {details}';
   const sanityParams = { indicator: indicatorGroup(indicator) };
   const indicators = await sanityClient.fetch(query, sanityParams);
   if (indicators.length > 0) {
-    indicatorDetail = indicators[0].detail;
+    indicatorDetails = indicators[0].details;
   }
 
   // Select the single dataset needed for the specific indicator
@@ -63,14 +64,14 @@ export async function getServerSideProps({ params }) {
       chartCsv,
       tableCsv,
       indicator,
-      indicatorDetail,
+      indicatorDetails,
     },
   };
 }
 
 export default function Indicator({
   indicator,
-  indicatorDetail,
+  indicatorDetails,
   location,
   metadata,
   locationDataset,
@@ -102,10 +103,10 @@ export default function Indicator({
       </h1>
 
       <div className="flex items-center flex-wrap justify-around">
-        { indicatorDetail && (
-          <pre className="detail flex-[1_1_50%] p-5">
-            {indicatorDetail}
-          </pre>
+        { indicatorDetails && (
+          <div className="detail flex-[1_1_50%] p-5">
+            <PortableText value={indicatorDetails} />
+          </div>
         )}
 
         {lineChartLoading || lineChartUrl ? (

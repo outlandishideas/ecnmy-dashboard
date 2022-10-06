@@ -14,6 +14,7 @@
     "test-t": "cypress run"
   },
   "dependencies": {
+    "@portabletext/react": "^1.0.6",
     "@sanity/client": "^3.3.6",
     "@sanity/image-url": "^1.0.1",
     "next": "^12.2.5",
