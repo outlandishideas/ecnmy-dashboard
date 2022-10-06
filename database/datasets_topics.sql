@@ -20,7 +20,9 @@ INSERT INTO datasets_topics (dataset_id, topic_id) VALUES
 (6, 17),
 (7, 14),
 (7, 16),
-(7, 17)
+(7, 17),
+(8, 12),
+(8, 14)
 ;
 
 COMMIT;
