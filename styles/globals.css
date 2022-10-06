@@ -131,10 +131,15 @@ a.emphasised, .detail a {
   text-align: center;
 }
 
+/* Allow for e.g. line breaks in dataset descriptions. */
+pre {
+  white-space: pre-wrap;
+  font-family: "Sofia", "Lato", BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
 .detail {
   padding: 1rem;
-  font-family: "Sofia", "Lato", BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 .source-logo {

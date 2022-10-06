@@ -106,7 +106,7 @@ export default function Card({ dataset, location }) {
                   ) : null}
                   <p>
                     <span className="font-semibold">Description:</span>{" "}
-                    {dataset.metadata.description}
+                    <pre>{dataset.metadata.description}</pre>
                   </p>
                 </div>
               </div>

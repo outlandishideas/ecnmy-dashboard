@@ -20,7 +20,7 @@ export default async function lowPay(path, property, jobType) {
   });
 
   const metadata = {
-    description: 'This data looks at jobs paid below London Living Wage across London boroughs. Data is restricted to jobs held by people who live in London (residence-based), and their job may be based outside of London.',
+    description: `This data shows the proportion of part-time workers who are paid less than the London Living Wage (LLW), which was £11.05 p/h in 2021.  The LLW is the London-weighted version of the Real Living Wage, an hourly rate calculated by the Living Wage Foundation as the minimum income needed for a full-time worker to meet their everyday needs.\n\nThis data is residence-based: it is linked to where workers live, not the location of their job.`,
     downloads: null,
     keywords: ['inequality', 'jobs', 'money', 'poverty'],
     methodologies: {

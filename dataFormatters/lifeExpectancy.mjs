@@ -7,7 +7,7 @@ async function jsonParser(file) {
   return data;
 }
 
-export default async function lifeExpectancy(route, indicatorGroup) {
+export default async function lifeExpectancy(route, indicatorGroup, genderLabel) {
   const gender = await jsonParser(route);
 
   gender.data.forEach((item) => {
@@ -29,7 +29,7 @@ export default async function lifeExpectancy(route, indicatorGroup) {
   const releaseDate = metadataAPI.release_date.substring(0, 10);
 
   const metadata = {
-    description: metadataAPI.description,
+    description: `This data calculates the average age ${genderLabel} can expect to live to. It is a period life expectancy, which means it assumes the mortality rate for a specific demographic group will remain the same throughout their lives.`,
     downloads: metadataAPI.downloads,
     keywords: metadataAPI.keywords,
     methodologies: metadataAPI.qmi,

@@ -7,7 +7,7 @@ async function jsonParser(file) {
   return data;
 }
 
-export default async function wellbeing(route, indicatorGroup) {
+export default async function wellbeing(route, indicatorGroup, indicatorLabel) {
   const emotion = await jsonParser(route);
 
   emotion.data.forEach((item) => {
@@ -26,7 +26,7 @@ export default async function wellbeing(route, indicatorGroup) {
   const releaseDate = metadataAPI.release_date.substring(0, 10);
 
   const metadata = {
-    description: metadataAPI.description,
+    description: `This data shows the average score given by respondents when asked to rate their answer to the question "overall, how ${indicatorLabel} did you feel yesterday?" on a scale where 0 is "not at all" and 10 is "completely".`,
     downloads: metadataAPI.downloads,
     keywords: metadataAPI.keywords,
     methodologies: metadataAPI.methodologies,
