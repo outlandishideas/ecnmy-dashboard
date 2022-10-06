@@ -26,7 +26,7 @@ export default async function unemploymentBenefits() {
   totalClaim.data = tidyClaimData;
   let totalClaimMetadata = {
     description:
-      "This experimental series counts the number of people claiming Jobseeker''s Allowance plus those who claim Universal Credit and are required to seek work and be available for work and replaces the number of people claiming Jobseeker''s Allowance as the headline indicator of the number of people claiming benefits principally for the reason of being unemployed.",
+      "This data shows the number of residents who are receiving two types of welfare - Job Seekers Allowance and Universal Credit - that the UK government pays to unemployed people who meet the schemes’ criteria.",
     downloads: null,
     keywords: ["poverty", "universal credit", "jobseekers allowance"],
     methodologies: {

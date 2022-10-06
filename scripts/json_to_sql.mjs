@@ -15,18 +15,22 @@ const jsonToSql = async () => {
   const [happiness, happinessMetadata] = await wellbeing(
     "./datasets/happiness.json",
     indicatorGroup("happiness"),
+    'happy',
   );
   const [anxiety, anxietyMetadata] = await wellbeing(
     "./datasets/anxiety.json",
     indicatorGroup("anxiety"),
+    'anxious',
   );
   const [femaleLifeExpectancy, femaleLifeExpectancyMetadata] = await lifeExpectancy(
     "./datasets/female_life_expectancy.json",
     indicatorGroup("life expectancy (female)"),
+    'women',
   );
   const [maleLifeExpectancy, maleLifeExpectancyMetadata] = await lifeExpectancy(
     "./datasets/male_life_expectancy.json",
     indicatorGroup("life expectancy (male)"),
+    'men',
   );
   const [totalClaim, totalClaimMetadata] = await unemploymentBenefits();
   const [partTimeLowPay, partTimeLowPayMetadata] = await lowPay(
