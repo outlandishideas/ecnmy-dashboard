@@ -1,4 +1,6 @@
-{ "data":
+{
+    "rank_mode": "standard",
+    "data":
     [
     {
         "V4_3": 6.96,
