@@ -23,7 +23,13 @@ export default {
       description: 'A longer explanation of the indicator, for e.g. the indicator overview page. This is a block field, so you can add multiple paragraphs, images, etc.',
       of: [
         {
-          type: 'block'
+          type: 'block',
+          styles: [
+            {title: 'Normal', value: 'normal'},
+            {title: 'H1', value: 'h1'},
+            {title: 'H2', value: 'h2'},
+            {title: 'H3', value: 'h3'},
+          ],
         }
       ],
     },
