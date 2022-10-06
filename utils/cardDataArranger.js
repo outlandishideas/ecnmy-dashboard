@@ -32,31 +32,46 @@ const findChange = (current, previous, Geography) => {
   return ((currentValue - previousValue) / previousValue) * 100;
 };
 
+const getCurrentYearSorted = (allCurrentYearData, reverseRanks) => {
+  return allCurrentYearData
+    .filter((data) => {
+      return data.Geography !== 'United Kingdom' && data.Geography !== 'London';
+    })
+    .sort((a, b) => reverseRanks ? (a.Value - b.Value) : (b.Value - a.Value));
+}
+
 export default function cardDataArranger(arr, location) {
   return arr.map((dataset) => {
     //Gives us the array of data in the dataset
     const dataArray = dataset.data.data;
 
     // Inits variables for the card object we're building
-    const allCurrentYearData = sortByYearReturningOneYear(dataArray, [0, 35]);
-    const lastYearsData = sortByYearReturningOneYear(dataArray, [35, 70]);
-    const boroughCurrentYearData = allCurrentYearData
-      .filter((data) => {
-        return data.Geography === "United Kingdom" ||
-          data.Geography === "London"
-          ? false
-          : true;
-      })
-      .sort((a, b) => b.Value - a.Value);
+    // As of 6/10/22, the one reverse rank dataset is also the one that includes London but didn't have UK-wide
+    // data, so for now we hack it to reflect the row count based on this. To future proof it, probably as part
+    // of ECONOMY-38, we'll likely want to rethink this more thoroughly or at a minimum add a rank_data_points
+    // field to the dataset JSON.
+    let dataPointsCount = (dataset.data.rank_mode === 'reversed') ? 34 : 35;
+    const allCurrentYearData = sortByYearReturningOneYear(dataArray, [0, dataPointsCount]);
+    const lastYearsData = sortByYearReturningOneYear(dataArray, [dataPointsCount, 2 * dataPointsCount]);
+    const boroughCurrentYearData = getCurrentYearSorted(
+      allCurrentYearData,
+      dataset.data.rank_mode === 'reversed',
+    );
 
     const locationData =
       getDataByGeography(allCurrentYearData, location) || null;
     const ukData =
       getDataByGeography(allCurrentYearData, "United Kingdom")?.Value || null;
     const londonData = getDataByGeography(allCurrentYearData, "London")?.Value || null;
-    const ranking =
-      boroughCurrentYearData.findIndex((item) => item.Geography === location) +
-      1; // +1 as 0 indexed
+
+    let ranking = null;
+    // Skip for datasets with currently-dubious calculations. See ECONOMY-38 + linked.
+    if (dataset.data.rank_mode !== 'none') {
+      ranking = boroughCurrentYearData
+        .findIndex((item) => item.Geography === location)
+        + 1; // +1 as 0 indexed
+    }
+
     const change = findChange(allCurrentYearData, lastYearsData, location);
     const isNull = locationData === null || locationData?.Value === '';
     const currentYear = allCurrentYearData[0].Time;
