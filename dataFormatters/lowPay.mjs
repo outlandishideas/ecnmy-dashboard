@@ -15,7 +15,7 @@ export default async function lowPay(path, property, jobType) {
       item[property] = undefined;
     }
 
-    item.Time = '2021-12';
+    item.Time = '2021';
     item.Value = item[property];
   });
 
