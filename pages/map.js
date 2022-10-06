@@ -54,7 +54,7 @@ export default function Map({
   const [indicatorOptions, setIndicatorOptions] = useState(
     selectOptions(filteredAllIndicators, 'indicator', 'indicator_group')
   );
-  const [mapUrl, mapLoading, setMapDataAndIndicator] = useChoropleth();
+  const [mapUrl, mapLoading, setMapDataAndSupporting] = useChoropleth();
 
   //filters viewable indicators on the basis of chosen topic
   useEffect(() => {
@@ -80,13 +80,14 @@ export default function Map({
           const data = dataset.data.data
             .filter((dataset) => dataset.Geography !== "London")
             .filter((dataset) => dataset.Geography !== "United Kingdom");
-          setMapDataAndIndicator({
+          setMapDataAndSupporting({
             dataset: sortByYearReturningOneYear(data, [0, 33]),
             indicator: indicatorToFilter,
+            rank_mode: dataset.data.rank_mode,
           });
         });
     }
-  }, [setMapDataAndIndicator, indicator]);
+  }, [setMapDataAndSupporting, indicator]);
 
   //clicking a borough on the map redirects the user to the relevant indicator page
   const router = useRouter();

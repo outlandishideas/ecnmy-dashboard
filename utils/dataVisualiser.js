@@ -14,6 +14,7 @@ export default async function dataVisualiser(
   chartType,
   minValue = undefined,
   maxValue = undefined,
+  rankMode = 'normal',
 ) {
   let title;
   if (chartType === "d3-lines") {
@@ -53,6 +54,11 @@ export default async function dataVisualiser(
   if (chartType === "d3-maps-choropleth") {
     let minLabel = 'Low';
     let maxLabel = 'High';
+
+    if (rankMode === 'reversed') {
+      minLabel = 'High';
+      maxLabel = 'Low';
+    }
 
     if (minValue !== undefined) {
       minLabel = `${minLabel} (${minValue})`;

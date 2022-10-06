@@ -42,29 +42,31 @@ function getRoundedMinMax(dataset) {
 export default function useDatawrapper() {
   const [chartUrl, setChartUrl] = useState(null);
   const [loading, setLoading] = useState(null);
-  const [datasetAndIndicator, setDatasetAndIndicator] = useState({
+  const [datasetAndSupporting, setDatasetAndSupporting] = useState({
     dataset: null, // Array of objects. We'll convert with `buildCsv()` prior to calling out to Datawrapper.
     indicator: null,
+    rank_mode: 'normal',
   });
 
   // Send the datawrapper-proxy the details needed to send to datawrapper
   useEffect(() => {
-    if (!datasetAndIndicator.indicator) {
+    if (!datasetAndSupporting.indicator) {
       return
     }
 
-    const minMax = getRoundedMinMax(datasetAndIndicator.dataset);
+    const minMax = getRoundedMinMax(datasetAndSupporting.dataset);
 
     setLoading(true);
     fetch("/api/datawrapper-proxy", {
       method: "POST",
       body: JSON.stringify({
-        csv: buildCsv(datasetAndIndicator.dataset, datasetAndIndicator.indicator),
-        indicator: datasetAndIndicator.indicator,
+        csv: buildCsv(datasetAndSupporting.dataset, datasetAndSupporting.indicator),
+        indicator: datasetAndSupporting.indicator,
         location: null,
         chartType: "d3-maps-choropleth",
         minValue: minMax.min,
         maxValue: minMax.max,
+        rankMode: datasetAndSupporting.rank_mode,
       }),
     })
       .then((resolve) => resolve.json())
@@ -72,7 +74,7 @@ export default function useDatawrapper() {
         setChartUrl(resolve.chartUrl);
         setLoading(false);
       });
-  }, [datasetAndIndicator]);
+  }, [datasetAndSupporting]);
 
-  return [chartUrl, loading, setDatasetAndIndicator];
+  return [chartUrl, loading, setDatasetAndSupporting];
 }
